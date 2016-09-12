@@ -3,7 +3,7 @@ var Sequelize = require('sequelize');
 
 var db = require('../db');
 
-var park = db.define('park', {
+module.exports = db.define('park', {
 	name: {
 		type: Sequelize.STRING,
 		allowNull: false
@@ -28,5 +28,3 @@ var park = db.define('park', {
 		allowNull: false
 	}
 });
-
-module.exports = park;
