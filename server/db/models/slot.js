@@ -20,7 +20,7 @@ module.exports = db.define('slot', {
         allowNull: false
     },
     price: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
         allowNull: false
     },
     date: {
