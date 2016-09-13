@@ -2,7 +2,7 @@
 app.directive('facility', function() {
     return {
       restrict: 'E',
-      templateUrl: 'facility.html'
+      templateUrl: '/js/facility/templates/facility.html'
       /*,
       scope: {
 
