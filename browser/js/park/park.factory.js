@@ -10,5 +10,10 @@ app.factory('ParkFactory', function($http) {
 		.then(getData);
 	}
 
+	ParkFactory.findOne = function(id) {
+		return $http.get('/api/parks/' + id)
+		.then(getData);
+	}
+
 	return ParkFactory;
 })
