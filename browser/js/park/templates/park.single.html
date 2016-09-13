@@ -1,0 +1,17 @@
+<!--park.single.html-->
+<div class="container">
+  <div class="park_heading_container">
+    <h1>{{ park.name }}</h1>
+  </div>
+
+  <div class="park_body">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a ui-sref="park.description">Home</a></li>
+      <li role="presentation"><a ui-sref="park.facilities">Facilities</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <ui-view></ui-view>
+  </div>
+</div>
