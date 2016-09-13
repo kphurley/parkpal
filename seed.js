@@ -22,6 +22,7 @@ var db = require('./server/db');
 var User = db.model('user');
 var Facility = db.model('facility');
 var Park = db.model('park');
+var Slot = db.model('slot');
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -99,10 +100,38 @@ var seedParksAndFacilities = function() {
     return Promise.all([createWickerPark, createWellesPark]);
 }
 
+var createSlots = function() {
+    var slotArray = [];
+    var startTime = 900;
+    var endTime = 1800;
+    for(var i=startTime; i<endTime; i+=100)
+    {
+        slotArray.push({
+            startTime: i,
+            endTime: i+100,
+            price: 50.00,
+            date: '09-14-2016',
+            facilityId: 1
+        })
+    }
+    return slotArray;
+}
+
+var seedSlots = function () {
+
+    var slots = createSlots();
+
+    var creatingSlots = slots.map(function (slotObj) {
+        return Slot.create(slotObj);
+    });
+
+    return Promise.all(creatingSlots);
+}
+
 
 db.sync({force: true})
     .then(function () {
-        return Promise.all([seedUsers(), seedParksAndFacilities()]);
+        return Promise.all([seedUsers(), seedParksAndFacilities(), seedSlots()]);
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
