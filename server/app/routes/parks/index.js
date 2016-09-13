@@ -11,12 +11,20 @@ router.get('/', function(req, res, next) {
 	.catch(next);
 });
 
-router.get('/:id', function(req, res, next) {
+router.use('/:id', function(req, res, next) {
 	Park.findById(req.params.id)
 	.then(function(park) {
-		res.json(park);
+		if (!park) res.status(404).send("Error ");
+		req.park = park;
+		next()
 	})
 	.catch(next);
+})
+
+router.get('/:id', function(req, res, next) {
+	res.json(req.park);
 });
+
+router.use('/:id/facilities', require('./facilities'));
 
 
