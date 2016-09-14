@@ -37,7 +37,7 @@ app.config(function($stateProvider) {
         .then(function(slots) {
           slots.forEach((slot) => {
             slot.startTimeConverted = SlotFactory.convertTime(slot.startTime);
-            slot.endTimeConverted = SlotFactory.convertTime(slot.endTime)
+            slot.endTimeConverted = SlotFactory.convertTime(slot.endTime);
           });
           return slots;
         })
