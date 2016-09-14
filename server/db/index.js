@@ -31,6 +31,6 @@ Facility.belongsToMany(Type, {through: 'facility_type'});
 Type.belongsToMany(Facility, {through: 'facility_type'});
 
 
-Cart.belongsTo(User, {as: 'userId'});
+Cart.belongsTo(User, {as: 'user'});
 
 
