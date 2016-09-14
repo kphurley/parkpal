@@ -46,4 +46,8 @@ app.config(function($stateProvider) {
       }
     }
   })
+  .state('park.facilitySlots.slots', {
+    url: '/slots',
+    templateUrl: '/js/slot/templates/slots.html'
+  })
 })
