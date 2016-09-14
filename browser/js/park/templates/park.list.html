@@ -1,3 +1,5 @@
-<ul>
-	<li ng-repeat="park in parks">{{park}}</li>
-</ul>
+<div container="container">
+  <ul>
+  	<li ng-repeat="park in parks"><a ui-sref="park({id: park.id})">{{ park.name }}</a></li>
+  </ul>
+</div>
