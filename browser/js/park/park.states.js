@@ -28,6 +28,7 @@ app.config(function($stateProvider) {
   })
   .state('park.facilitySlots', {
     url: '/facility/:facilityId',
+    //abstract: true,
     templateUrl: '/js/slot/templates/facility-slots.html',
     controller: 'SlotsCtrl',
     resolve: {

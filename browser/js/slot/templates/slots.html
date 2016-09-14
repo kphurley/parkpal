@@ -1,5 +1,22 @@
 <div>
-  <div class="row" ng-repeat="slot in slots">
-    {{ slot.startTimeConverted }} - {{ slot.endTimeConverted }}  |  ${{ slot.price }}
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Price</th>
+          <th>Availability</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="slot in slots">
+          <td>{{ slot.startTimeConverted }}</td>
+          <td>{{ slot.endTimeConverted }} </td>
+          <td>${{ slot.price }}</td>
+          <td>{{ slot.booked }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
