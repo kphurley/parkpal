@@ -7,7 +7,5 @@ app.factory('HomeFactory', function($http) {
 		return $http.get('/api/parks')
 		.then(getData);
 	}
-
-
 	return homeAPI;
 });
