@@ -1,12 +1,27 @@
 #home {
-  fullstack-logo {
-    padding-top: 30px;
-    width: 150px;
-    margin: 0 auto;
+  background-image: url("/images/landingBackground.jpg");
+  background-color: #cccccc;
+  min-height: 500px;
+  padding: 0;
+  margin: 0;
+
+  .row {
+  	padding-top: 100px;
   }
+
   h1 {
-    margin-top: 40px;
-    text-align: center;
+  	color: #00FF00;
+  }
+
+  ul {
+  	padding: 0;
+  }
+
+  li {
+  	color: #00FF00;
+  	list-style: none;
+  	padding: 0;
   }
 }
+
 
