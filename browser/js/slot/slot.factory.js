@@ -12,7 +12,10 @@ app.factory('SlotFactory', function($http) {
     },
     convertTime: function(militaryTime) {
       let stringifiedTime = String(militaryTime);
-      if(militaryTime <= 1200) {
+      if(militaryTime < 1000) {
+        return Math.floor(militaryTime/100) + ':' + stringifiedTime.substr(1) + ' AM';
+      }
+      else if(militaryTime <= 1200){
         return Math.floor(militaryTime/100) + ':' + stringifiedTime.substr(2) + ' AM';
       }
       else{

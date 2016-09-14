@@ -9,7 +9,16 @@
   </div>
   <div class="col-lg-2">
 
-    <button class="btn btn-default" ui-sref="park.facilitySlots({facilityId: facility.id})">View Schedule</button>
+    <button ng-hide="inSlots" class="btn btn-default" ui-sref="park.facilitySlots({facilityId: facility.id})">View Schedule</button>
+
+    <div ng-show="inSlots" ng-controller="DatepickerDemoCtrl as vm">
+        <input type="text" class="form-control"
+               datepicker-popup="mediumDate"
+               is-open="vm.valuationDatePickerIsOpen"
+               ng-click="vm.valuationDatePickerOpen()"
+               ng-model="vm.valuationDate" />
+    </div>
 
   </div>
 </div>
+
