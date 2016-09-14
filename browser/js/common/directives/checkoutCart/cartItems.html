@@ -9,38 +9,26 @@
     </tr>
   </thead>
   <tbody>
-    <tr> <!-- should ng-repeat item in cart-items -->
+    <tr ng-repeat="slot in slots"> <!-- should ng-repeat item in cart-items -->
       <!-- <th scope="row">1</th> -->
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>$$$$</td>
-    </tr>
-    <tr>
-      <!-- <th scope="row">2</th> -->
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>$$$</td>
-    </tr>
-    <tr>
-      <!-- <th scope="row">3</th> -->
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>$$$</td>
+      <td>{{ slot.facilityId }}</td>
+      <td>{{ slot.startTime }} - {{ slot.endTime }}</td>
+      <td>{{ slot.price }}</td>
     </tr>
     <tr>
       <td class="thick-line"></td>
       <td class="thick-line text-right">Sub-Total</td>
-      <td class="thick-line">$$$$</td>
+      <td class="thick-line">{{ subtotal }}</td>
     </tr>
     <tr>
       <td></td>
       <td class="text-right">Tax</td>
-      <td>$$$$$</td>
+      <td>{{ tax }}</td>
     </tr>
     <tr>
       <td></td>
       <td class="text-right">Total</td>
-      <td>$$$$</td>
+      <td>{{ total }}</td>
     </tr>
   </tbody>
 </table>
