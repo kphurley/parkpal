@@ -4,4 +4,5 @@ app.controller('ParkCtrl', function($scope, parks) {
 
 app.controller('SingleParkCtrl', function($scope, park) {
   $scope.park = park;
+  $scope.inSlots = false;
 })

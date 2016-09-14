@@ -6,4 +6,5 @@
 app.controller('SlotsCtrl', function($scope, SlotFactory, slots, facility, $state) {
   $scope.slots = slots;
   $scope.facility = facility;
+  $scope.inSlots = true;
 })
