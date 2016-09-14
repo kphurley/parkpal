@@ -26,4 +26,24 @@ app.config(function($stateProvider) {
     url: '/facilities',
     templateUrl: '/js/facility/templates/facilities.html'
   })
+  .state('park.facilitySlots', {
+    url: '/facility/:facilityId',
+    templateUrl: '/js/slot/templates/facility-slots.html',
+    controller: 'SlotsCtrl',
+    resolve: {
+      slots: function(SlotFactory, $stateParams) {
+        return SlotFactory.findAllSlotsInFactory($stateParams.id, $stateParams.facilityId)
+        .then(function(slots) {
+          slots.forEach((slot) => {
+            slot.startTimeConverted = SlotFactory.convertTime(slot.startTime);
+            slot.endTimeConverted = SlotFactory.convertTime(slot.endTime)
+          });
+          return slots;
+        })
+      },
+      facility: function(FacilityFactory, $stateParams) {
+        return FacilityFactory.findById($stateParams.id, $stateParams.facilityId);
+      }
+    }
+  })
 })

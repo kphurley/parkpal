@@ -10,6 +10,7 @@ app.factory('ParkFactory', function($http, $q) {
 		.then(getData);
 	}
 
+
 	ParkFactory.findOne = function(id) {
 		var url = '/api/parks/' + id;
 		return $q.all([$http.get(url), $http.get(url + '/facilities')])
