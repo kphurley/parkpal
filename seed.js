@@ -23,6 +23,7 @@ var User = db.model('user');
 var Facility = db.model('facility');
 var Park = db.model('park');
 var Slot = db.model('slot');
+var Cart = db.model('cart');
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -85,6 +86,9 @@ var seedParksAndFacilities = function() {
         }
     ];
 
+    // This implementation might give an issue in the future since facilities depend on a park existing in
+    // the database first and these are async functions.... just a guess.
+    // for now it works :)
     var createWickerPark =
         Promise.all([Park.create(parks[0]), Facility.create(facilities[0]), Facility.create(facilities[1])])
         .spread(function(park, facil0, facil1) {
@@ -114,6 +118,8 @@ var createSlots = function() {
             facilityId: 1
         })
     }
+    // create a cart id for some slots slotArray[0].
+
     return slotArray;
 }
 
@@ -128,10 +134,58 @@ var seedSlots = function () {
     return Promise.all(creatingSlots);
 }
 
+var createCarts = function () {
+    var newDateObj = new Date(new Date().getTime() + 10*60000);
+    console.log(newDateObj);
+
+  return [{
+            userId: 1,
+            expires: newDateObj
+           },
+                   {
+            userId: 1,
+            expires: newDateObj
+           },
+                   {
+            userId: 1,
+            expires: newDateObj
+           },
+                   {
+            userId: 2,
+            expires: newDateObj
+           },
+                   {
+            userId: 2,
+            expires: newDateObj
+           },
+                   {
+            userId: 2,
+            expires: newDateObj
+           }];
+
+
+}
+
+var seedCarts = function() {
+
+    var carts = createCarts();
+
+    var creatingCarts = carts.map(function (cartObj) {
+        return Cart.create(cartObj);
+    });
+
+    return Promise.all(creatingCarts);
+}
+
+
+
 
 db.sync({force: true})
     .then(function () {
         return Promise.all([seedUsers(), seedParksAndFacilities(), seedSlots()]);
+    })
+    .then(function() {
+        return seedCarts();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
