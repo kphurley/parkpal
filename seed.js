@@ -177,6 +177,20 @@ var seedCarts = function() {
     return Promise.all(creatingCarts);
 }
 
+var updateSlots = function() {
+    return Slot.findAll( { where: { 
+                        id: { $between: [4,7] }
+                     }
+                    })
+            .then(function(slots) {
+                // console.log(chalk.red("Slots"), slots);
+                return Promise.all(slots.map(function(slot) {
+                    return slot.update({cartId: 1});
+                }))
+            })
+
+}
+
 
 
 
@@ -186,6 +200,9 @@ db.sync({force: true})
     })
     .then(function() {
         return seedCarts();
+    })
+    .then(function() {
+        return updateSlots();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
