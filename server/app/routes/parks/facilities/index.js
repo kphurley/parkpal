@@ -33,3 +33,5 @@ router.use('/:id', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
 	res.json(req.facility);
 })
+
+router.use('/:id/slots', require('./slots'));
