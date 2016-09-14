@@ -2,8 +2,13 @@
   box-sizing: border-box;
 }
 
-body {
+#wrap {
+  min-height: 100%;
+}
+
+html, body {
   background: #fdfdfd;
+  height: 100%;
 }
 
 @mixin clearfix {
@@ -15,11 +20,14 @@ body {
 }
 
 #main {
+  overflow: auto;
   padding-top: 0px;
+  padding-bottom: 180px;
   margin: 0 auto;
+
 }
 
-
+@import 'footer/main';
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
