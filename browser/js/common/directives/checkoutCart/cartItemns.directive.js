@@ -3,4 +3,5 @@ app.directive('cartItems', function() {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/checkoutCart/cartItems.html'
 	}
-})
+});
+
