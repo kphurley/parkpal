@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
 	});
 
 	$stateProvider.state('user.transactions', {
-		url: '/profile',
+		url: '/transaction',
 		templateUrl: '/js/user/templates/userTransactions.html',
 		controller: 'UserCtrl'
 	});
