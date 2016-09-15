@@ -17,7 +17,7 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
             slot.endTimeConverted = SlotFactory.convertTime(slot.endTime);
           });
       $scope.slots = _slots;
-      //$scope.$digest;
+
     });
   }
 })

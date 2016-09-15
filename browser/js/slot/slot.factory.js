@@ -1,5 +1,5 @@
 //slot.factory.js
-app.factory('SlotFactory', function($http) {
+app.factory('SlotFactory', function($http, CartFactory) {
 
   var getData = function(res) {
     return res.data;
@@ -20,6 +20,17 @@ app.factory('SlotFactory', function($http) {
       .then(function(slots) {
         slots.sort((a,b) => a.startTime - b.startTime );
         return slots;
+      });
+    },
+    findUserCartSlots: function(userId) {
+      console.log('userId', userId);
+      return CartFactory.findUserCart(userId)
+      .then(function(cart) {
+        return $http.get('/api/carts/' + cart.id + '/slots');
+      })
+      .then(function(slots) {
+        console.log(slots);
+        return slots.data;
       });
     },
     convertTime: function(militaryTime) {

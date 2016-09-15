@@ -1,8 +1,13 @@
-app.config(function($stateProvider) {
-  $stateProvider.state('user.addToCart', {
-    url: '/addToCart',
-    templateUrl: '/js/cart/templates/cart.html',
-    controller: 'CartCtrl'
+/*app.config(function($stateProvider) {
+  $stateProvider.state('user.cart', {
+    url: '/cart',
+    templateUrl: '/js/user/templates/userCart.html',
+    controller: 'CartCtrl',
+    resolve: {
+      userCart: function(userId, CartFactory) {
+        return CartFactory.findUserCart(userId);
+      }
+    }
   })
-});
+});*/
 

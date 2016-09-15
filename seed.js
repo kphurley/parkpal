@@ -169,7 +169,7 @@ var createCarts = function () {
             userId: 1,
             expires: newDateObj
            },
-                   {
+           /*        {
             userId: 1,
             expires: newDateObj
            },
@@ -184,7 +184,7 @@ var createCarts = function () {
                    {
             userId: 2,
             expires: newDateObj
-           },
+           },*/
                    {
             userId: 2,
             expires: newDateObj
@@ -212,7 +212,9 @@ var updateSlots = function() {
             .then(function(slots) {
                 // console.log(chalk.red("Slots"), slots);
                 return Promise.all(slots.map(function(slot) {
-                    return slot.update({cartId: 1});
+                    return slot.update(
+                        {cartId: 1,
+                        booked: true});
                 }))
             })
 
