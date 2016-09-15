@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="user-name-heading">
+    <h1>{{ user.name }}</h1>
+  </div>
+
+  <div>
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active"><a ui-sref="user.profile">Profile</a></li>
+      <li role="presentation"><a ui-sref="user.transactions">Transactions</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <ui-view></ui-view>
+  </div>
+</div>
