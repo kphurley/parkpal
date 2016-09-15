@@ -8,7 +8,19 @@ app.factory('SlotFactory', function($http) {
   return {
     findAllSlotsInFactory: function(parkId, facilityId) {
       return $http.get('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots')
-      .then(getData);
+      .then(getData)
+      .then(function(slots) {
+        slots.sort((a,b) => a.startTime - b.startTime );
+        return slots;
+      });
+    },
+    findSlotsByDate: function(parkId, facilityId, date) {
+      return $http.get('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/' + date)
+      .then(getData)
+      .then(function(slots) {
+        slots.sort((a,b) => a.startTime - b.startTime );
+        return slots;
+      });
     },
     convertTime: function(militaryTime) {
       let stringifiedTime = String(militaryTime);

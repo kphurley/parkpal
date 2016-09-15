@@ -14,3 +14,17 @@ router.get('/', function(req, res, next) {
   })
   .catch(next);
 })
+
+router.get('/:date', function(req, res, next) {
+  //var date = req.params.date;
+  Slot.findAll({
+    where: {
+      facilityId: req.facility.id,
+      date: req.params.date
+    }
+  })
+  .then(function(slots) {
+    res.json(slots);
+  })
+  .catch(next);
+})
