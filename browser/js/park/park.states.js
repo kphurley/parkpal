@@ -50,4 +50,8 @@ app.config(function($stateProvider) {
     url: '/slots',
     templateUrl: '/js/slot/templates/slots.html'
   })
+  .state('park.facilitySlots.checkout', {
+    url: '/checkout',
+    templateUrl: '/js/slot/templates/slots-checkout.html'
+  })
 })
