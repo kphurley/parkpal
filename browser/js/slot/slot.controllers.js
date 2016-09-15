@@ -20,4 +20,9 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
 
     });
   }
-})
+
+  $scope.addToCart = function(slotId) {
+    SlotFactory.addToCart($scope.park.id, $scope.facility.id, slotId);
+  }
+});
+

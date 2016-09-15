@@ -1,5 +1,5 @@
 //slot.factory.js
-app.factory('SlotFactory', function($http, CartFactory) {
+app.factory('SlotFactory', function($http, CartFactory, AuthService) {
 
   var getData = function(res) {
     return res.data;
@@ -23,7 +23,6 @@ app.factory('SlotFactory', function($http, CartFactory) {
       });
     },
     findUserCartSlots: function(userId) {
-      console.log('userId', userId);
       return CartFactory.findUserCart(userId)
       .then(function(cart) {
         return $http.get('/api/carts/' + cart.id + '/slots');
@@ -45,6 +44,17 @@ app.factory('SlotFactory', function($http, CartFactory) {
         let pmTime = militaryTime - 1200;
         return Math.floor(pmTime/100) + ':' + stringifiedTime.substr(2) + ' PM';
       }
+    },
+    //Needs work...but should be OK for a logged in user
+    addToCart: function(parkId, facilityId, slotId) {
+      return AuthService.getLoggedInUser()
+      .then(function(user) {
+        return CartFactory.findUserCart(user.id);
+      })
+      .then(function(cart) {
+        return $http.post('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/' + slotId, {cartId: cart.id});
+      })
+      .then(getData);
     }
   }
 })

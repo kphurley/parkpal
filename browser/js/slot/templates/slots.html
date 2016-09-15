@@ -17,8 +17,8 @@
           <td>${{ slot.price }}</td>
           <td><div ng-show="slot.booked">BOOKED</div>
               <div ng-hide="slot.booked">
-                <a class="glyphicon glyphicon-plus-sign" aria-hidden="true" ui-sref="addToCart({slotId: slot.id})">
-                </a>
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ng-click="addToCart(slot.id)">
+                </span>
               </div>
           </td>
         </tr>

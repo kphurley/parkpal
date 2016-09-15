@@ -28,3 +28,18 @@ router.get('/:date', function(req, res, next) {
   })
   .catch(next);
 })
+
+router.post('/:id', function(req, res, next) {
+  var toUpdate = {
+    cartId: req.body.cartId,
+    booked: true
+  };
+  Slot.findById(req.params.id)
+  .then(function(slot){
+    slot.update(toUpdate)})
+  .then(function(newSlot) {
+    res.status(200).json(newSlot);
+  })
+  .catch(next);
+});
+
