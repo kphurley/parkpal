@@ -1,6 +1,9 @@
 'use strict';
 var router = require('express').Router();
+
+var Cart = require('../../../db').model('cart');
 var User = require('../../../db').model('user'); // eslint-disable-line new-cap
+
 module.exports = router;
 
 
@@ -19,7 +22,9 @@ router.get('/:id', function(req, res, next) {
 		if (!user) { res.status(404).send(); }
 		res.json(user);
 	});
-}); 
+
+});
+
 
 // ATTEMPT TO LOGIN DIRECTLY AFTER SIGNUP
 // return $http.post('/login', credentials)
@@ -27,3 +32,4 @@ router.get('/:id', function(req, res, next) {
 //                 .catch(function () {
 //                     return $q.reject({ message: 'Invalid login credentials.' });
 //                 });
+

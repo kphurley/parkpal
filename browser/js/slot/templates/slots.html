@@ -1,5 +1,6 @@
 <div>
   <div>
+    <h2>Slots for: {{ formattedDate }}</h2>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -14,7 +15,12 @@
           <td>{{ slot.startTimeConverted }}</td>
           <td>{{ slot.endTimeConverted }} </td>
           <td>${{ slot.price }}</td>
-          <td>{{ slot.booked }}</td>
+          <td><div ng-show="slot.booked">BOOKED</div>
+              <div ng-hide="slot.booked">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ng-click="addToCart(slot.id)">
+                </span>
+              </div>
+          </td>
         </tr>
       </tbody>
     </table>

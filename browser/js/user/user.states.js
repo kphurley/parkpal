@@ -18,4 +18,25 @@ app.config(function($stateProvider) {
 		controller: 'UserCtrl'
 	});
 
+	$stateProvider.state('user.cart', {
+    url: '/cart',
+    templateUrl: '/js/user/templates/userCart.html',
+    controller: 'CartCtrl',
+    resolve: {
+      userCart: function($stateParams, CartFactory) {
+        return CartFactory.findUserCart($stateParams.id);
+      },
+      userSlots: function($stateParams, SlotFactory) {
+      	return SlotFactory.findUserCartSlots($stateParams.id)
+      	.then(function(slots){
+      		slots.forEach((slot) => {
+            slot.startTimeConverted = SlotFactory.convertTime(slot.startTime);
+            slot.endTimeConverted = SlotFactory.convertTime(slot.endTime);
+          });
+      		return slots;
+      	});
+      }
+    }
+  });
+
 });

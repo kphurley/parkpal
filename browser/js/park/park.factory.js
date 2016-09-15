@@ -24,6 +24,11 @@ app.factory('ParkFactory', function($http, $q) {
 		})
 	}
 
+  ParkFactory.formatDate = function(date) {
+    if(!date) return;
+    return date.toISOString().substr(0,10); //yyyy-mm-dd
+  }
+
 	return ParkFactory;
 })
 
