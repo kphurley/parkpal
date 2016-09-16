@@ -22,7 +22,7 @@ app.controller('AdminCtrl', function($scope, UserFactory, AdminFactory, $state, 
 
  	$scope.userToEdit = $stateParams.userToEdit;
 
-	
+
 });
 
 
@@ -40,6 +40,14 @@ app.controller('AdminParkCtrl', function($scope, ParkFactory, $state, $statePara
 		.then(function(park) {
 			$scope.park = park;
 			$state.go('admin.parks.editPark', { parkId: park.id, parkToEdit: park});
+		});
+	};
+
+	$scope.editPark = function(parkData) {
+		console.log("admin controller park data", parkData);
+		ParkFactory.updatePark(parkData)
+		.then(function(park) {
+			$state.go('admin.parks.list');
 		});
 	};
 

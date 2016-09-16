@@ -25,6 +25,18 @@ router.get('/:id', function(req, res, next) {
 	res.json(req.park);
 });
 
+router.put('/:id', function(req, res, next) {
+	Park.findById(req.params.id)
+	.then(function (park) {
+		return park.update(req.body);
+	})
+	.then(function(park) {
+		if (!park) {throw new Error("this is not the park you are looking for")}
+		res.json(park);
+	})
+	.catch(next);
+});
+
 router.post('/', function(req, res, next) {
 	Park.create(req.body)
 		.then(function(park) {

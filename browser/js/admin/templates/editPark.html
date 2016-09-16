@@ -1,31 +1,31 @@
-<form id="park-update-form" name="parkCreateForm" ng-submit="parkCreateForm.$valid && updatePark(park)">
+<form id="park-update-form" name="parkCreateForm" ng-submit="parkCreateForm.$valid && editPark(parkToEdit)">
     <alert type="danger" ng-show="error">
         {{ error }}
     </alert>
 
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" ng-model="park.name" class="form-control" id="name" placeholder="{{parkToEdit.name}}">
+        <input type="text" ng-model="parkToEdit.name" class="form-control" id="name" placeholder="{{parkToEdit.name}}">
     </div>
 
     <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" ng-model="park.description" class="form-control" id="description" placeholder="{{parkToEdit.description}}">
+        <input type="text" ng-model="parkToEdit.description" class="form-control" id="description" placeholder="{{parkToEdit.description}}">
     </div>
 
     <div class="form-group">
         <label for="location">Location</label>
-        <input type="text" ng-model="park.location" class="form-control" id="location" placeholder="{{parkToEdit.location}}">
+        <input type="text" ng-model="parkToEdit.location" class="form-control" id="location" placeholder="{{parkToEdit.location}}">
     </div>
 
     <div class="form-group">
         <label for="phone">Phone Number</label>
-        <input type="phone" ng-model="park.phone" class="form-control" id="phone" placeholder="{{parkToEdit.phone}}">
+        <input type="phone" ng-model="parkToEdit.phone" class="form-control" id="phone" placeholder="{{parkToEdit.phone}}">
     </div>
 
     <div class="form-group">
         <label for="email">Email address</label>
-        <input type="text" ng-model="park.email" class="form-control" id="email" placeholder="{{parkToEdit.email}}">
+        <input type="text" ng-model="parkToEdit.email" class="form-control" id="email" placeholder="{{parkToEdit.email}}">
     </div>
 
     <button type="submit" class="btn btn-success">Update</button>
