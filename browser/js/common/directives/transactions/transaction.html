@@ -1,5 +1,5 @@
-<div class="row">
-	<h1>Transaction for INSERT A DATE HERE</h1>
+<div class="row" ng-repeat="transaction in transactions">
+	<h1>Transaction for {{ transaction.createdAt }}</h1>
 	<table class="table">
 	  <thead class="thead-default">
 	    <tr>
@@ -10,10 +10,17 @@
 	  </thead>
 	  <tbody>
 	    <tr>
-	      <td>INSERT PARK + FACILITY NAME</td>
+	      <td>{{}}</td>
 	      <td>TIME SLOT</td>
 	      <td>$$$$$$</td>
 	    </tr>
+	    <tr>
+	      <td></td>
+	      <td></td>
+	      <td>{{transaction.totalAmountPaid}}</td>
+	    </tr>
+
+
 	  </tbody>
 	</table>
 </div>

@@ -1,4 +1,4 @@
-app.controller('UserCtrl', function($scope, UserFactory, $stateParams, $state) {
+app.controller('UserCtrl', function($scope, UserFactory, $stateParams, $state, TransactionFactory) {
 
 	UserFactory.getOne($stateParams.id)
 	.then(function(user) {
@@ -6,7 +6,11 @@ app.controller('UserCtrl', function($scope, UserFactory, $stateParams, $state) {
 	});
 
 	//temporary transactions
-	$scope.transactions = [1, 2, 3, 4];
+    TransactionFactory.getAllByUserId($stateParams.id)
+        .then(function(transactions) {
+          console.log(transactions);
+          $scope.transactions = transactions;
+      });
 
 	$scope.updateUser = function(userData) {
 		UserFactory.updateUser(userData)
