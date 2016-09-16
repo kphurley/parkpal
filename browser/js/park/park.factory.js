@@ -24,6 +24,11 @@ app.factory('ParkFactory', function($http, $q) {
 		})
 	}
 
+	ParkFactory.create = function(park) {
+		return $http.post('/api/parks', park)
+		.then(getData);
+	}
+
 	return ParkFactory;
 })
 

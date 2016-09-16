@@ -25,6 +25,14 @@ router.get('/:id', function(req, res, next) {
 	res.json(req.park);
 });
 
+router.post('/', function(req, res, next) {
+	Park.create(req.body)
+		.then(function(park) {
+			res.json(park)
+		})
+		.catch(next)
+})
+
 router.use('/:id/facilities', require('./facilities'));
 
 

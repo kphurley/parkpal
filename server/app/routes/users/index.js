@@ -13,17 +13,18 @@ router.post('/', function (req, res, next) {
   .catch(next);
 });
 
-router.get('/:id', function(req, res, next) {
-	return User.findById(req.params.id)
-	.then(function(user) {
-		if (!user) { res.status(404).send(); }
-		res.json(user);
-	});
-}); 
+router.get('/', function(req, res, next) {
+  console.log('getting here');
+  return User.findAll()
+  .then(function(users) {
+    res.json(users);
+  });
+});
 
-// ATTEMPT TO LOGIN DIRECTLY AFTER SIGNUP
-// return $http.post('/login', credentials)
-//                 .then(onSuccessfulLogin)
-//                 .catch(function () {
-//                     return $q.reject({ message: 'Invalid login credentials.' });
-//                 });
+router.get('/:id', function(req, res, next) {
+  return User.findById(req.params.id)
+  .then(function(user) {
+    if (!user) { res.status(404).send(); }
+    res.json(user);
+  });
+});

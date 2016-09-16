@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><h1>All Users</h1>
+  <a class="btn btn-primary" ui-sref="admin.newUser">CREATE NEW USER</a>
+</div>
+  <div class="panel-body">
+  </div>
+  <table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>id<br><input ng-model="search.id"></th>
+	      <th>First Name<br><input ng-model="search.firstName"></th>
+	      <th>Last Name<br><input ng-model="search.lastName"></th>
+	      <th>Email<br><input ng-model="search.email"></th>
+	      <th>Phone<br><input ng-model="search.phone"></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="user in users | filter: { id: search.id }
+	    							 | filter: { firstName: search.firstName }
+	    							 | filter: { lastName: search.lastName }
+	    							 | filter: { email: search.email }
+	    							 | filter: { phone: search.phone }">
+	      <th>{{user.id}}</th>
+	      <td>{{user.firstName}}</td>
+	      <td>{{user.lastName}}</td>
+	      <td>{{user.email}}</td>
+	      <td>{{user.phone}}</td>
+	      <td><button class="btn btn-warning" ui-sref="admin.editUser({userId: user.id, userToEdit: user})">Edit</button></td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
+  
