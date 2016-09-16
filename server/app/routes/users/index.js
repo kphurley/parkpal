@@ -4,8 +4,21 @@ var router = require('express').Router();
 var Cart = require('../../../db').model('cart');
 var User = require('../../../db').model('user'); // eslint-disable-line new-cap
 var chalk = require('chalk');
+var userTransactionsRouter = require('./transactions');
 module.exports = router;
 
+router.use('/:id', function(req, res, next) {
+  return User.findById(req.params.id)
+  .then(function(user) {
+    if (!user) { res.status(404).send(); }
+    req.reqUser = user;
+    console.log(chalk.blue('user'), req.reqUser);
+    next();
+  })
+  .catch(next);
+});
+
+router.use('/:id/transactions', userTransactionsRouter);
 
 router.post('/', function (req, res, next) {
   var userLogin = {};
@@ -25,7 +38,6 @@ router.get('/', function(req, res, next) {
   .catch(next);
 });
 
-
 router.get('/:id', function(req, res, next) {
 	return User.findById(req.params.id)
 	.then(function(user) {
@@ -34,8 +46,7 @@ router.get('/:id', function(req, res, next) {
 	})
   .catch(next);
 
-})
-;
+});
 
 
 router.put('/:id', function(req, res, next) {

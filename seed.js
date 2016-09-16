@@ -24,6 +24,7 @@ var Facility = db.model('facility');
 var Park = db.model('park');
 var Slot = db.model('slot');
 var Cart = db.model('cart');
+var Transaction = db.model('transaction');
 var Promise = require('sequelize').Promise;
 
 var seedUsers = function () {
@@ -215,11 +216,36 @@ var updateSlots = function() {
                     return slot.update(
                         {cartId: 1,
                         booked: true});
-                }))
-            })
+                }));
+            });
+};
+
+var createTransactions = function() {
+
+    return [ {
+            totalAmountPaid: 500,
+            userId: 1
+        }, {
+            totalAmountPaid: 800,
+            userId: 1
+        }, {
+            totalAmountPaid: 900,
+            userId: 2
+        }, {
+            totalAmountPaid: 1500,
+            userId: 2
+        }]
 
 }
 
+var seedTransactions = function() {
+    var transactions = createTransactions();
+    var creatingTransactions = transactions.map(function(transactionObj) {
+        return Transaction.create(transactionObj);
+    })
+
+    return Promise.all(creatingTransactions);
+}
 
 
 
@@ -232,6 +258,9 @@ db.sync({force: true})
     })
     .then(function() {
         return updateSlots();
+    })
+    .then(function() {
+        return seedTransactions();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));

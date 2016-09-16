@@ -14,7 +14,6 @@ app.factory('UserFactory', function($http) {
 	}
 
 	userAPI.updateUser = function(userData) {
-		console.log("factory user data", userData)
 		return $http.put('/api/users/' + userData.id, userData)
 		.then(getData)
 	}
