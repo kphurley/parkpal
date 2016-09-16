@@ -22,7 +22,12 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
   }
 
   $scope.addToCart = function(slotId) {
-    SlotFactory.addToCart($scope.park.id, $scope.facility.id, slotId);
+    SlotFactory.addToCart($scope.park.id, $scope.facility.id, slotId)
+    .then(function(slot) {
+      console.log('slot added to cart:', slot);
+      $state.go('park.facilitySlots.checkout',
+                {id: $scope.park.id, facilityId: $scope.facility.id});
+    })
   }
 });
 

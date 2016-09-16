@@ -35,6 +35,12 @@ app.factory('ParkFactory', function($http, $q) {
     return date.toISOString().substr(0,10); //yyyy-mm-dd
   }
 
+  ParkFactory.updatePark = function(parkData) {
+  	console.log("factory park data", parkData)
+		return $http.put('/api/parks/' + parkData.id, parkData)
+		.then(getData)
+  }
+
 
 	return ParkFactory;
 })
