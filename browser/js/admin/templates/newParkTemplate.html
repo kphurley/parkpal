@@ -1,0 +1,33 @@
+<form id="park-create-form" name="parkCreateForm" ng-submit="parkCreateForm.$valid && createPark(park)">
+
+    <alert type="danger" ng-show="error">
+        {{ error }}
+    </alert>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" ng-model="park.name" class="form-control" id="name" placeholder="Enter park name...">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" ng-model="park.description" class="form-control" id="description" placeholder="Description...">
+    </div>
+
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" ng-model="park.location" class="form-control" id="location" placeholder="Location...">
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="phone" ng-model="park.phone" class="form-control" id="phone" placeholder="Phone number...">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" ng-model="park.email" class="form-control" id="email" placeholder="Email...">
+    </div>
+
+    <button type="submit" class="btn btn-success">Create Park</button>
+</form>

@@ -16,6 +16,15 @@ router.post('/', function (req, res, next) {
   .catch(next);
 });
 
+router.get('/', function(req, res, next) {
+  console.log('getting here');
+  return User.findAll()
+  .then(function(users) {
+    res.json(users);
+  });
+});
+
+
 router.get('/:id', function(req, res, next) {
 	return User.findById(req.params.id)
 	.then(function(user) {

@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><h1>All Parks</h1>
+  <a class="btn btn-primary" ui-sref="admin.parks.new">CREATE NEW Park</a>
+</div>
+  <div class="panel-body">
+  </div>
+  <table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>id<br><input ng-model="search.id"></th>
+	      <th>Name<br><input ng-model="search.name"></th>
+	      <th>Description<br><input ng-model="search.description"></th>
+	      <th>Location<br><input ng-model="search.location"></th>
+	      <th>Email<br><input ng-model="search.email"></th>
+	      <th>Phone<br><input ng-model="search.phone"></th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="park in parks | filter: { id: search.id }
+	    							 | filter: { name: search.name }
+	    							 | filter: { description: search.description }
+	    							 | filter: { location: search.location }
+	    							 | filter: { email: search.email }
+	    							 | filter: { phone: search.phone }">
+	      <th>{{park.id}}</th>
+	      <td>{{park.name}}</td>
+	      <td>{{park.description}}</td>
+	      <td>{{park.location}}</td>
+	      <td>{{park.email}}</td>
+	      <td>{{park.phone}}</td>
+	      <td><button class="btn btn-warning" ui-sref="admin.parks.editPark({parkId: park.id, parkToEdit: park})">Edit</button></td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
+  

@@ -24,10 +24,17 @@ app.factory('ParkFactory', function($http, $q) {
 		})
 	}
 
+
+	ParkFactory.create = function(park) {
+		return $http.post('/api/parks', park)
+		.then(getData);
+	}
+
   ParkFactory.formatDate = function(date) {
     if(!date) return;
     return date.toISOString().substr(0,10); //yyyy-mm-dd
   }
+
 
 	return ParkFactory;
 })
