@@ -23,7 +23,7 @@ module.exports = db.define('slot', {
         allowNull: false
     },
     date: {
-        type: Sequelize.DATEONLY,
+        type: Sequelize.STRING,
         allowNull: false
     },
     dayOfWeek: {

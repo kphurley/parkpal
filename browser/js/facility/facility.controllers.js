@@ -1,14 +1,10 @@
 //facility.controllers.js
-app.controller('DatepickerDemoCtrl', [
-function () {
+/*app.controller('DatepickerCtrl', function ($scope) {
 
-  var vm = this;
+  $scope.valuationDate = new Date();
+  $scope.valuationDatePickerIsOpen = false;
 
-  vm.valuationDate = new Date();
-  vm.valuationDatePickerIsOpen = false;
-
-  vm.valuationDatePickerOpen = function () {
-
-      this.valuationDatePickerIsOpen = true;
+  $scope.valuationDatePickerOpen = function () {
+    this.valuationDatePickerIsOpen = true;
   };
-}]);
+});*/

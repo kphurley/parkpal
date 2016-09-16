@@ -1,5 +1,5 @@
 //slot.factory.js
-app.factory('SlotFactory', function($http) {
+app.factory('SlotFactory', function($http, CartFactory, AuthService) {
 
   var getData = function(res) {
     return res.data;
@@ -8,7 +8,29 @@ app.factory('SlotFactory', function($http) {
   return {
     findAllSlotsInFactory: function(parkId, facilityId) {
       return $http.get('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots')
-      .then(getData);
+      .then(getData)
+      .then(function(slots) {
+        slots.sort((a,b) => a.startTime - b.startTime );
+        return slots;
+      });
+    },
+    findSlotsByDate: function(parkId, facilityId, date) {
+      return $http.get('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/' + date)
+      .then(getData)
+      .then(function(slots) {
+        slots.sort((a,b) => a.startTime - b.startTime );
+        return slots;
+      });
+    },
+    findUserCartSlots: function(userId) {
+      return CartFactory.findUserCart(userId)
+      .then(function(cart) {
+        return $http.get('/api/carts/' + cart.id + '/slots');
+      })
+      .then(function(slots) {
+        console.log(slots);
+        return slots.data;
+      });
     },
     convertTime: function(militaryTime) {
       let stringifiedTime = String(militaryTime);
@@ -22,6 +44,17 @@ app.factory('SlotFactory', function($http) {
         let pmTime = militaryTime - 1200;
         return Math.floor(pmTime/100) + ':' + stringifiedTime.substr(2) + ' PM';
       }
+    },
+    //Needs work...but should be OK for a logged in user
+    addToCart: function(parkId, facilityId, slotId) {
+      return AuthService.getLoggedInUser()
+      .then(function(user) {
+        return CartFactory.findUserCart(user.id);
+      })
+      .then(function(cart) {
+        return $http.post('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/' + slotId, {cartId: cart.id});
+      })
+      .then(getData);
     }
   }
 })

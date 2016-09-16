@@ -86,6 +86,7 @@ var seedParksAndFacilities = function() {
         }
     ];
 
+
     // This implementation might give an issue in the future since facilities depend on a park existing in
     // the database first and these are async functions.... just a guess.
     // for now it works :)
@@ -104,20 +105,39 @@ var seedParksAndFacilities = function() {
     return Promise.all([createWickerPark, createWellesPark]);
 }
 
-var createSlots = function() {
+/**
+ * createSlots - creates a set of slots for a facilityId
+ * @param  {number - integer} startTime - the start time for this set of slots
+ * @param  {number - integer} endTime - the end time for the set
+ * @param  {number - integer} duration - the duration of each slot
+ * @param  {number - float} price - the price for each slot
+ * @param  {string} date - the date in the form 'MM-DD-YYYY'
+ * @param  {number - integer} - the id of the facility to add slots to
+ * @return {Array of Objects} - an array of Slot objects
+ */
+var createSlots = function(startTime, endTime, duration, price, date, facilityId) {
     var slotArray = [];
-    var startTime = 900;
-    var endTime = 1800;
-    for(var i=startTime; i<endTime; i+=100)
+    //var startTime = 900;
+    //var endTime = 1800;
+    for(var i=startTime; i<endTime; i+=duration)
     {
         slotArray.push({
             startTime: i,
             endTime: i+100,
             price: 50.00,
-            date: '09-14-2016',
-            facilityId: 1
+            date: date,
+            facilityId: facilityId
         })
     }
+
+    /*slotArray.push({
+        startTime: 1800,
+        endTime: 1900,
+        price: 50.00,
+        date: '09-16-2016',
+        facilityId: 1,
+        booked: true
+    })*/
     // create a cart id for some slots slotArray[0].
 
     return slotArray;
@@ -125,7 +145,14 @@ var createSlots = function() {
 
 var seedSlots = function () {
 
-    var slots = createSlots();
+    var slots = [];
+
+    for(var i=1; i<4; i++) {
+        slots = slots.concat(createSlots(900, 1800, 100, 50.00, '2016-09-16', i));
+        slots = slots.concat(createSlots(900, 1800, 100, 50.00, '2016-09-17', i));
+    }
+
+    console.log('SLOTS', slots);
 
     var creatingSlots = slots.map(function (slotObj) {
         return Slot.create(slotObj);
@@ -142,7 +169,7 @@ var createCarts = function () {
             userId: 1,
             expires: newDateObj
            },
-                   {
+           /*        {
             userId: 1,
             expires: newDateObj
            },
@@ -157,7 +184,7 @@ var createCarts = function () {
                    {
             userId: 2,
             expires: newDateObj
-           },
+           },*/
                    {
             userId: 2,
             expires: newDateObj
@@ -178,14 +205,16 @@ var seedCarts = function() {
 }
 
 var updateSlots = function() {
-    return Slot.findAll( { where: { 
+    return Slot.findAll( { where: {
                         id: { $between: [4,7] }
                      }
                     })
             .then(function(slots) {
                 // console.log(chalk.red("Slots"), slots);
                 return Promise.all(slots.map(function(slot) {
-                    return slot.update({cartId: 1});
+                    return slot.update(
+                        {cartId: 1,
+                        booked: true});
                 }))
             })
 

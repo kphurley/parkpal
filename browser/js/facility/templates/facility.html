@@ -11,12 +11,14 @@
 
     <button ng-hide="inSlots" class="btn btn-default" ui-sref="park.facilitySlots({facilityId: facility.id})">View Schedule</button>
 
-    <div ng-show="inSlots" ng-controller="DatepickerDemoCtrl as vm">
+    <div ng-show="inSlots">
         <input type="text" class="form-control"
-               datepicker-popup="mediumDate"
-               is-open="vm.valuationDatePickerIsOpen"
-               ng-click="vm.valuationDatePickerOpen()"
-               ng-model="vm.valuationDate" />
+               uib-datepicker-popup="mediumDate"
+               is-open="valuationDatePickerIsOpen"
+               ng-click="valuationDatePickerOpen()"
+               ng-model="valuationDate"
+               placeholder="Click to choose a date" />
+        <button ng-click="findSlots()" class="btn btn-primary">Find Slots</button>
     </div>
 
   </div>
