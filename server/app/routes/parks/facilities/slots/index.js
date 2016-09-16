@@ -36,7 +36,7 @@ router.post('/:id', function(req, res, next) {
   };
   Slot.findById(req.params.id)
   .then(function(slot){
-    slot.update(toUpdate)})
+    return slot.update(toUpdate)})
   .then(function(newSlot) {
     res.status(200).json(newSlot);
   })

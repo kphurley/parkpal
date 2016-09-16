@@ -52,6 +52,34 @@ app.config(function($stateProvider) {
   })
   .state('park.facilitySlots.checkout', {
     url: '/checkout',
-    templateUrl: '/js/slot/templates/slots-checkout.html'
+    templateUrl: '/js/slot/templates/slots-checkout.html',
+    controller: 'CartCtrl',
+    resolve: {
+      userCart: function($stateParams, CartFactory, AuthService) {
+        var id;
+        return AuthService.getLoggedInUser()
+        .then(function(user) {
+          id = user.id;
+          return CartFactory.findUserCart(id);
+        })
+      },
+      userSlots: function($stateParams, SlotFactory, AuthService) {
+        var id;
+        return AuthService.getLoggedInUser()
+        .then(function(user) {
+          id = user.id;
+          return SlotFactory.findUserCartSlots(id);
+        })
+        .then(function(slots){
+          slots.forEach((slot) => {
+            slot.startTimeConverted = SlotFactory.convertTime(slot.startTime);
+            slot.endTimeConverted = SlotFactory.convertTime(slot.endTime);
+          });
+          console.log('slots after convert', slots);
+          return slots;
+        });
+
+      }
+    }
   })
-})
+});
