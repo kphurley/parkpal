@@ -1,4 +1,4 @@
-<form id="signup-form" name="signupForm" ng-submit="signupForm.$valid && editUser(signup)">
+<form id="signup-form" name="signupForm" ng-submit="signupForm.$valid && editUser(userToEdit)">
 
     <alert type="danger" ng-show="error">
         {{ error }}
@@ -6,22 +6,22 @@
 
     <div class="form-group">
         <label for="firstName">First Name</label>
-        <input type="text" ng-model="signup.firstName" class="form-control" id="firstName" placeholder="{{userToEdit.firstName}}">
+        <input type="text" ng-model="userToEdit.firstName" class="form-control" id="firstName" value="{{userToEdit.firstName}}">
     </div>
 
     <div class="form-group">
         <label for="lastName">Last Name</label>
-        <input type="text" ng-model="signup.lastName" class="form-control" id="lastName" placeholder="{{userToEdit.lastName}}">
+        <input type="text" ng-model="userToEdit.lastName" class="form-control" id="lastName" placeholder="{{userToEdit.lastName}}">
     </div>
 
     <div class="form-group">
         <label for="phone">Phone Number</label>
-        <input type="phone" ng-model="signup.phone" class="form-control" id="phone" placeholder="{{userToEdit.phone}}">
+        <input type="phone" ng-model="userToEdit.phone" class="form-control" id="phone" placeholder="{{userToEdit.phone}}">
     </div>
 
     <div class="form-group">
         <label for="email">Email address</label>
-        <input type="text" ng-model="signup.email" class="form-control" id="email" placeholder="{{userToEdit.email}}">
+        <input type="text" ng-model="userToEdit.email" class="form-control" id="email" placeholder="{{userToEdit.email}}">
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>
