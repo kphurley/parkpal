@@ -1,4 +1,4 @@
-<div class="row" ng-repeat="transaction in transactions">
+<div class="row">
 	<h1>Transaction for {{ transaction.createdAt }}</h1>
 	<table class="table">
 	  <thead class="thead-default">
@@ -9,10 +9,10 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr>
+	    <tr ng-repeat="slot in transaction.slots">
 	      <td>{{}}</td>
-	      <td>TIME SLOT</td>
-	      <td>$$$$$$</td>
+	      <td>{{slot.startTime}}-{{slot.endTime}}</td>
+	      <td>{{slot.price}}</td>
 	    </tr>
 	    <tr>
 	      <td></td>
