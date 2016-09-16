@@ -8,9 +8,17 @@ app.controller('AdminCtrl', function($scope, UserFactory, AdminFactory, $state, 
 	$scope.createNewUser = function(userData) {
 		AdminFactory.createUser(userData)
 		.then(function(user) {
-			$state.go('admin.users')
-		})
-	}
+			$state.go('admin.users');
+		});
+	};
+
+	$scope.editUser = function(userData) {
+		console.log("admin controller user data", userData);
+		UserFactory.updateUser(userData)
+		.then(function(user) {
+			$state.go('admin.users');
+		});
+	};
 
  	$scope.userToEdit = $stateParams.userToEdit;
 
@@ -31,9 +39,8 @@ app.controller('AdminParkCtrl', function($scope, ParkFactory, $state, $statePara
 		ParkFactory.create(park)
 		.then(function(park) {
 			$scope.park = park;
-			$state.go('admin.parks.editPark', { parkId: park.id, parkToEdit: park})
-		})
-	}
+			$state.go('admin.parks.editPark', { parkId: park.id, parkToEdit: park});
+		});
+	};
 
-	
 });
