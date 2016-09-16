@@ -28,7 +28,7 @@ app.factory('SlotFactory', function($http, CartFactory, AuthService) {
         return $http.get('/api/carts/' + cart.id + '/slots');
       })
       .then(function(slots) {
-        console.log(slots);
+        console.log('slots in slot factory',slots);
         return slots.data;
       });
     },
