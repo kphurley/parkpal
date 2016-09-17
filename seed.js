@@ -215,7 +215,8 @@ var updateSlots = function() {
                 return Promise.all(slots.map(function(slot) {
                     return slot.update(
                         {cartId: 1,
-                        booked: true});
+                        booked: true,
+                        transactionId: Math.floor(Math.random()*2 + 1)}); // adding slots to transactions
                 }));
             });
 };
@@ -249,6 +250,7 @@ var seedTransactions = function() {
 
 
 
+
 db.sync({force: true})
     .then(function () {
         return Promise.all([seedUsers(), seedParksAndFacilities(), seedSlots()]);
@@ -257,10 +259,10 @@ db.sync({force: true})
         return seedCarts();
     })
     .then(function() {
-        return updateSlots();
+        return seedTransactions();
     })
     .then(function() {
-        return seedTransactions();
+        return updateSlots();
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));

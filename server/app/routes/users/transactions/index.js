@@ -12,9 +12,19 @@ var chalk = require('chalk');
 // });
 
 router.get('/', function(req, res, next) {
- 	Transaction.findAll( { where: { userId: req.reqUser.id },
- 							include: [Slot, {model: Facility, 
- 											through: { attributes: ['id']}}]} )
+	var rawSql = `SELECT * FROM "transactions" AS "transaction" 
+	LEFT OUTER JOIN "slots" AS "slot" ON "transaction"."id" = "slot"."transactionId" 
+	LEFT OUTER JOIN "facilities" AS "slot.facility" ON "slot"."facilityId" = "slot.facility"."id";` 
+
+ 	Transaction.findAll( { 
+ 		where: { userId: req.reqUser.id },
+ 		include: [{
+ 			model: Slot,
+ 			include: [Facility]
+ 		}]
+	 })
+ 							// include: [Slot, {model: Facility, 
+ 							// 				through: { attributes: ['id']}}]} )
  	.then(function(transactions) {
  		res.json(transactions);
  	});

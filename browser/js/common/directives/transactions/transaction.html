@@ -10,7 +10,7 @@
 	  </thead>
 	  <tbody>
 	    <tr ng-repeat="slot in transaction.slots">
-	      <td>{{}}</td>
+	      <td>{{slot.facility.name}}</td>
 	      <td>{{slot.startTime}}-{{slot.endTime}}</td>
 	      <td>{{slot.price}}</td>
 	    </tr>
@@ -19,8 +19,6 @@
 	      <td></td>
 	      <td>{{transaction.totalAmountPaid}}</td>
 	    </tr>
-
-
 	  </tbody>
 	</table>
 </div>

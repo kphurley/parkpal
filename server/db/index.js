@@ -27,8 +27,8 @@ Transaction.belongsTo(User);
 Transaction.hasMany(Slot);
 Slot.belongsTo(Transaction);
 
-Transaction.belongsToMany(Facility, {through: Slot});
-Facility.belongsToMany(Transaction, {through: Slot});
+// Transaction.belongsToMany(Facility, {through: Slot});
+// Facility.belongsToMany(Transaction, {through: Slot}); 
 
 Cart.hasMany(Slot);
 Slot.belongsTo(Cart);
