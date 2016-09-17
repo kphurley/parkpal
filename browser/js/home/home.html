@@ -1,21 +1,18 @@
 <div class="jumbotron" id="home">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
-			<div class="input-group">
-		      <input type="text" class="form-control" placeholder="Search for a park..." ng-model="search">
-		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button">Go!</button>
-		      </span>
-		    </div>
+		  <div uib-dropdown uib-dropdown-toggle>
+	      <input type="text" class="form-control" placeholder="Search for a park..." ng-model="search">
+			    <ul uib-dropdown-menu class="park-list-dropdown">
+			        <li ng-repeat="park in parks | filter: { name: search}" ng-click="goToPark(park.id)">{{park.name}}</li>
+			    </ul>
+	      </div>
 		</div>
+
 	</div>
 	<div class="row text-center">
-		<div class="col-md-4 col-md-offset-4">
+		<div class="col-md-12 ">
 	      <h1>ParkPal Parks</h1>
-	      <ul>
-	      	<li ng-repeat="park in parks | filter: {name: search}">
-				<a ui-sref="park({id: park.id})">{{park.name }}</a></li>
-      	  </ul>
 		</div>
 	</div>
 </div>  

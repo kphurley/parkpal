@@ -1,4 +1,18 @@
+@import '../colorScheme';
+
+#login-signup-form {
+	position: relative;
+	padding-top: 14%;
+	padding-bottom: 14%;
+};
+
 #login-form {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
+};
+
+#signup-form {
+	position:relative;
+	padding-top: 5%;
+	padding-bottom: 5%;
 }
