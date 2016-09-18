@@ -1,32 +1,22 @@
+@import '../colorScheme';
+
 footer {
 	display: block;
 	border-top: 6px solid gray;
-	bottom: 0;
-	width: 100%;
-	background-color: #FE8402;
+	background-color: $powderGreen;
 	position: relative;
-  margin-top: -180px;
-  height: 180px;
   clear: both;
+  text-align: center;
+  min-height: 175px;
 
-  fullstack-logo {
+  parkpal-logo {
   	display: inline-block;
-    margin-top: 5px;
-    margin-right: 20px;
-    width: 40px;
+    margin-top: 20%;
     bottom: 0;
   }
 
   .container {
-  	padding-top: 30px;
-		display: inline-flex;
-		justify-content: space-around;
-		width: 80%;
-		color: gray;
-	}
-
-	.footer-col {
-		margin: auto;
+  		color: gray;
 	}
 }
 

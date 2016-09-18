@@ -9,7 +9,7 @@ module.exports = {
   FACEBOOK: {
     clientID: '183014895460138',
     clientSecret: 'adea6f8bda88fac021bb0c941d97e73e',
-    callbackURL: '/auth/facebook'
+    callbackURL: '/auth/facebook/callback'
   },
   GOOGLE: {
     clientID: 'INSERT_GOOGLE_CLIENTID_HERE',

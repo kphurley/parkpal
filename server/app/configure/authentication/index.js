@@ -7,7 +7,7 @@ var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var ENABLED_AUTH_STRATEGIES = [
     'local',
     //'twitter',
-    //'facebook',
+    'facebook',
     //'google'
 ];
 
@@ -30,6 +30,19 @@ module.exports = function (app, db) {
         resave: false,
         saveUninitialized: false
     }));
+
+    //use Facebook as our oauth provider
+    // passport.use(new FacebookStrategy({
+    //     clientID: FACEBOOK_APP_ID,
+    //     clientSecret: FACEBOOK_APP_SECRET,
+    //     callbackURL: "http://localhost:3000/auth/facebook/callback"
+    //   },
+    //   function(accessToken, refreshToken, profile, cb) {
+    //     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+    //       return cb(err, user);
+    //     });
+    //   }
+    // ));
 
     // Initialize passport and also allow it to read
     // the request session information.

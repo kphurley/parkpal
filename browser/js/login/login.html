@@ -1,17 +1,31 @@
-<form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
+<div class="container" id="login-signup-form">
+<div class="row">
+    <div class="col-md-4 col-md-offset-4"> 
+        <div class="panel panel-success"> 
+            <div class="panel-heading">
+                <h1 class="panel-title">Login </h1>
+            </div>
+            <div class="panel-body">
+            <form id="login-form" name="loginForm" ng-submit="loginForm.$valid && sendLogin(login)">
 
-    <alert type="danger" ng-show="error">
-        {{ error }}
-    </alert>
+                <alert type="danger" ng-show="error">
+                    {{ error }}
+                </alert>
 
-    <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="text" ng-model="login.email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
+                </div>
+                
+                <button type="submit" class="btn btn-success">Login</button><oauth-button provider-name="Facebook"></oauth-button>
+            </form>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="login-password">Password</label>
-        <input type="password" ng-model="login.password" class="form-control" id="login-password" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-    <p><oauth-button provider-name="Facebook"></oauth-button></p>
-</form>
+</div>
+</div>
+

@@ -1,7 +1,9 @@
+@import '../colorScheme';
+
 #home {
   background-image: url("/landingBackground.jpg");
   background-color: #cccccc;
-  min-height: 500px;
+  min-height: 550px;
   padding: 0;
   margin: 0;
 
@@ -10,7 +12,10 @@
   }
 
   h1 {
-  	color: #00FF00;
+    font-family: Helvetica;
+    font-weight: bold;
+    font-size: 5.5em;
+  	color: $orange;
   }
 
   ul {
@@ -18,9 +23,25 @@
   }
 
   li {
-  	color: #00FF00;
+  	color: $orange;
+    font-size: 1.5em;
   	list-style: none;
-  	padding: 0;
+  }
+
+  .park-list-dropdown {
+    width: 100%;
+    text-align: center;
+    border-radius: 15px;
+    overflow: hidden;
+
+    li:nth-child(even) {
+      background-color: $dirtyBlue;
+    }
+
+    li:nth-child(odd) {
+      background-color: $lightBlue;
+    }
+
   }
 }
 
