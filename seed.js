@@ -139,20 +139,32 @@ var seedParksAndFacilities = function() {
  * @param  {number - integer} - the id of the facility to add slots to
  * @return {Array of Objects} - an array of Slot objects
  */
-var createSlots = function(startTime, endTime, duration, price, date, facilityId) {
+var createSlots = function(facilityId) {
     var slotArray = [];
     //var startTime = 900;
     //var endTime = 1800;
-    for(var i=startTime; i<endTime; i+=duration)
-    {
+    var startDate = Date.now();
+    for(var i=0; i<24; i++)
+    {   
+        var endDate = startDate + 60*60*1000;
+
         slotArray.push({
-            startTime: i,
-            endTime: i+100,
+            startTime: startDate,
+            endTime: endDate,
             price: 50.00,
-            date: date,
             facilityId: facilityId
         })
+
+        startDate = endDate;
     }
+
+
+    slotArray.push({
+            startTime: new Date('Tue Sep 27 2016 00:00:00 GMT-0500 (CDT)'),
+            endTime: new Date('Tue Sep 27 2016 00:00:00 GMT-0500 (CDT)') + 360000,
+            price: 50.00,
+            facilityId: facilityId
+        })
 
     /*slotArray.push({
         startTime: 1800,
@@ -172,8 +184,8 @@ var seedSlots = function () {
     var slots = [];
 
     for(var i=1; i<4; i++) {
-        slots = slots.concat(createSlots(900, 1800, 100, 50.00, '2016-09-16', i));
-        slots = slots.concat(createSlots(900, 1800, 100, 50.00, '2016-09-17', i));
+        slots = slots.concat(createSlots(i));
+        slots = slots.concat(createSlots(i));
     }
 
     console.log('SLOTS', slots);

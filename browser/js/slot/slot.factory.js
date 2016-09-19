@@ -15,7 +15,8 @@ app.factory('SlotFactory', function($http, CartFactory, AuthService) {
       });
     },
     findSlotsByDate: function(parkId, facilityId, date) {
-      return $http.get('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/' + date)
+      var dateToPass = new Date(date).getTime();
+      return $http.get('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/' + dateToPass)
       .then(getData)
       .then(function(slots) {
         slots.sort((a,b) => a.startTime - b.startTime );

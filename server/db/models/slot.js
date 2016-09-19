@@ -11,28 +11,15 @@ module.exports = db.define('slot', {
         defaultValue: false
     },
     startTime: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DATE,
         allowNull: false
     },
     endTime: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DATE,
         allowNull: false
     },
     price: {
         type: Sequelize.FLOAT,
         allowNull: false
-    },
-    date: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    dayOfWeek: {
-        type: Sequelize.VIRTUAL,
-        set: function() {
-            var date = this.getDataValue('date');
-            var dateObj = new Date(date);
-            var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            this.setDataValue('dayOfWeek', daysOfWeek[dateObj.getDay()]);
-        }
     }
 });

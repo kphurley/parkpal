@@ -9,8 +9,14 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
   $scope.inSlots = true;
 
   $scope.findSlots = function() {
-    $scope.formattedDate = ParkFactory.formatDate($scope.valuationDate);
-    SlotFactory.findSlotsByDate($scope.park.id, $scope.facility.id, $scope.formattedDate)
+
+    console.log("new date", new Date($scope.valuationDate));
+    console.log("new date compare", $scope.valuationDate.getTime())
+    console.log("new date compare", $scope.valuationDate.getDate())
+    console.log("new date compare", $scope.valuationDate.getFullYear())
+    console.log("new date compare", $scope.valuationDate.getMonth());
+    // $scope.formattedDate = ParkFactory.formatDate($scope.valuationDate);
+    SlotFactory.findSlotsByDate($scope.park.id, $scope.facility.id, $scope.valuationDate)
     .then(function(_slots) {
       _slots.forEach((slot) => {
             slot.startTimeConverted = SlotFactory.convertTime(slot.startTime);

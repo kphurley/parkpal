@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var Slot = require('../../../../../db').model('slot'); // eslint-disable-line new-cap
 module.exports = router;
+var chalk = require('chalk');
 
 router.get('/', function(req, res, next) {
   Slot.findAll({
@@ -17,10 +18,15 @@ router.get('/', function(req, res, next) {
 
 router.get('/:date', function(req, res, next) {
   //var date = req.params.date;
+  var selectedDate = new Date(+req.params.date);
+  var endOfSelectedDate = new Date(+req.params.date + 24*60*60*1000)
+  console.log(chalk.blue("INSIDE THE DATE ROUTE"), endOfSelectedDate);
   Slot.findAll({
     where: {
       facilityId: req.facility.id,
-      date: req.params.date
+      startTime: {
+        $between: [selectedDate, endOfSelectedDate]
+      }
     }
   })
   .then(function(slots) {
