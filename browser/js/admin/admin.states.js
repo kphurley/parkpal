@@ -60,6 +60,13 @@ app.config(function ($stateProvider) {
 
 	$stateProvider.state('admin.parks.editPark.facilities', {
 		url: '/facilities',
+		templateUrl: '/js/admin/templates/editParkFacilitiesMain.html',
+		params: {parkId: null, parkToEdit: null, facilities: null},
+		controller: 'AdminParkFacilityCtrl'
+	});
+
+	$stateProvider.state('admin.parks.editPark.facilities.list', {
+		url: '/',
 		templateUrl: '/js/admin/templates/editParkFacilities.html',
 		params: {parkId: null, parkToEdit: null, facilities: null},
 		controller: 'AdminParkFacilityCtrl'
