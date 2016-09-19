@@ -27,9 +27,6 @@ app.factory('ParkFactory', function($http, $q) {
 		.then(function(results) {
 			var park = results[0];
 			park.facilities = results[1];
-      //hack to add average rating to park facilities
-      //would be better suited on model
-      console.log ('facilities', park.facilities);
       park.facilities.forEach(facility =>
         facility.averageRating = average(facility.reviews));
 			return park;

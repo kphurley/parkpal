@@ -7,7 +7,8 @@
   <div ng-show="facility.reviews.length > 0">
     <h3><p>Reviews for {{facility.name}}:</p></h3>
     <div ng-repeat="review in facility.reviews">
-      <p>{{ review.rating }}/5 <strong>{{ review.title }}</strong></p>
+      <p><span uib-rating ng-model="review.rating" max="5" readonly="true" aria-labelledby="default-rating" id="reviewRating"></span>
+      <strong>{{ review.title }}</strong></p>
       <p>{{ review.text }}</p>
     </div>
     <h3><p>Add a review below:</p></h3>
