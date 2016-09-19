@@ -10,23 +10,22 @@ module.exports = db.define('park', {
 	},
 	address: {
 		type: Sequelize.STRING,
-		allowNull: false
 	},
 	city: {
 		type: Sequelize.STRING,
-		allowNull: false
 	},
 	state: {
 		type: Sequelize.STRING,
-		allowNull: false
 	},
 	zip: {
 		type: Sequelize.INTEGER,
-		allowNull: false
 	},
 	description: {
 		type: Sequelize.TEXT,
 		allowNull: false
+	},
+	imageUrl: {
+		type: Sequelize.STRING
 	},
 	email: {
 		type: Sequelize.STRING,
