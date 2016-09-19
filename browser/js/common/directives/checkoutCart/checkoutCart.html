@@ -1,19 +1,28 @@
 <div class="container">
+
+	<cart-items></cart-items>
+
 	<div class="row">
 		<div class="col-md-12">
 			<form class="form-horizontal" role="form">
 			    <fieldset>
-			      <legend>Checkout Cart</legend>
+			      <h2>Checkout:</h2>
 			      <div class="form-group">
 			        <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
 			        <div class="col-sm-6">
-			          <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name">
+			          <input type="text" class="form-control" name="card-holder-name" id="card-holder-name" placeholder="Card Holder's Name" ng-model="payment.nameOnCard">
+			        </div>
+			      </div>
+			      <div class="form-group">
+			        <label class="col-sm-3 control-label" for="card-holder-email">Email Address</label>
+			        <div class="col-sm-6">
+			          <input type="email" class="form-control" name="card-holder-email" id="card-holder-email" placeholder="{{ user.email }}" ng-model="payment.email">
 			        </div>
 			      </div>
 			      <div class="form-group">
 			        <label class="col-sm-3 control-label" for="card-number">Card Number</label>
 			        <div class="col-sm-6">
-			          <input type="text" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number">
+			          <input type="password" class="form-control" name="card-number" id="card-number" placeholder="Debit/Credit Card Number" ng-model="payment.cardNumber">
 			        </div>
 			      </div>
 			      <div class="form-group">
@@ -21,7 +30,7 @@
 			        <div class="col-sm-6">
 			          <div class="row">
 			            <div class="col-xs-3">
-			              <select class="form-control col-sm-2" name="expiry-month" id="expiry-month">
+			              <select class="form-control col-sm-2" name="expiry-month" id="expiry-month" ng-model="payment.exp_month">
 			                <option>Month</option>
 			                <option value="01">Jan (01)</option>
 			                <option value="02">Feb (02)</option>
@@ -38,10 +47,7 @@
 			              </select>
 			            </div>
 			            <div class="col-xs-3">
-			              <select class="form-control" name="expiry-year">
-			                <option value="13">2013</option>
-			                <option value="14">2014</option>
-			                <option value="15">2015</option>
+			              <select class="form-control" name="expiry-year" ng-model="payment.exp_year">
 			                <option value="16">2016</option>
 			                <option value="17">2017</option>
 			                <option value="18">2018</option>
@@ -58,11 +64,9 @@
 			      <div class="form-group">
 			        <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
 			        <div class="col-sm-3">
-			          <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code">
+			          <input type="password" class="form-control" name="cvv" id="cvv" placeholder="Security Code" ng-model="payment.cvc">
 			        </div>
 			      </div>
-
-			      <cart-items></cart-items>
 
 			      <div class="form-group">
 			        <div class="col-sm-offset-9 col-sm-3">
@@ -75,5 +79,6 @@
 		</div>
 	</div>
 </div>
+
 
 

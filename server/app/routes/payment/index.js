@@ -18,23 +18,23 @@ var ensureAuthenticated = function (req, res, next) {
 router.post('/', ensureAuthenticated, function (req, res, next) {
   stripe.tokens.create({
     card: {
-      "number": '4242424242424242',
-      "exp_month": 12,
-      "exp_year": 2017,
-      "cvc": '123'
+      "number": req.body.cardNumber,
+      "exp_month": req.body.exp_month,
+      "exp_year": req.body.exp_year,
+      "cvc": req.body.cvc
     }
   }, function(err, token) {
     if(err) next(err);
     else{
       console.log('TOKEN: ', token);
       stripe.charges.create({
-        amount: 2000,
+        amount: (+req.body.payment * 100),
         currency: "usd",
         source: token.id,
-        description: "Charge for mason.thompson@example.com"
+        description: ("Charge for " + req.body.nameOnCard + " - " + req.body.email)
       }, function(err, charge) {
         if(err) next(err);
-        console.log('CHARGE OBJECT FROM STRIPE:', charge);
+        res.status(200).send();
       });
     }
   });

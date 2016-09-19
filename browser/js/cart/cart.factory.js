@@ -21,8 +21,9 @@ app.factory('CartFactory', function($http, $q) {
 
   }
 
-  cartAPI.submitPayment = function() {
-    return $http.post('/api/payment', {})
+  cartAPI.submitPayment = function(payment, total) {
+    payment.payment = total;
+    return $http.post('/api/payment', payment)
     .then(getData);
   }
 

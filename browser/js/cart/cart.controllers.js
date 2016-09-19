@@ -1,4 +1,4 @@
-app.controller('CartCtrl', function($scope, userCart, userSlots, CartFactory) {
+app.controller('CartCtrl', function($scope, userCart, userSlots, CartFactory, $state) {
 	// hardcoded for now
 	// carts should be associated with a particular user
 	/*CartFactory.findOne(1)
@@ -24,7 +24,10 @@ app.controller('CartCtrl', function($scope, userCart, userSlots, CartFactory) {
 	}
 
 	$scope.submitPayment = function() {
-		CartFactory.submitPayment($scope.payment);
+		CartFactory.submitPayment($scope.payment, $scope.total)
+		.then(function(paymentDetails) {
+			$state.go('home');
+		});
 	}
 
 });
