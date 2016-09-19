@@ -1,4 +1,31 @@
 <!--park.description.html-->
 <div class="container">
-  <p>{{ park.description }}</p>
+<div class="row">
+	<div class="col-md-2">
+		<h4>Contact</h4>
+	</div>
+	<div class="col-md-5">
+		<ul class="park-contact-list">
+			<li>Email: {{park.email}}</li>
+			<li>Phone: {{park.phone}}</li>
+		</ul>
+	</div>
+	<div class="col-md-5">
+		<p>
+			{{park.address}}<br>
+			{{park.city}}, {{park.zip}} {{park.state}}
+		</p>
+	</div>
+
+</div>
+<div class="row">
+	<div class="col-md-2">
+		<h4>Description</h4>
+	</div>
+	<div class="col-md-10">
+		<p>{{park.description}}</p>
+	</div>
+</div>
+
+
 </div>
