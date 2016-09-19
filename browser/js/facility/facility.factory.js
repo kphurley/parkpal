@@ -27,6 +27,11 @@ app.factory('FacilityFactory', function($http) {
   	.then(getData);
   }
 
+  FacilityFactory.createFacility = function(facility) {
+    return $http.post('/api/parks/' + facility.parkId + '/facilities/', facility)
+    .then(getData);
+  }
+
   return FacilityFactory;
 
 });
