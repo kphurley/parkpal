@@ -11,7 +11,9 @@ app.factory('FacilityFactory', function($http) {
     .then(getData);
   }
 
+
   return FacilityFactory;
+
 });
 
 

@@ -8,15 +8,15 @@
     <div class="row">
     {{ facility.description }}
     </div>
-    <div class="row">
+    <div class="row" ng-show="facility.reviews.length > 0">
       Average user rating:
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-
+      <span uib-rating ng-model="facility.averageRating" max="5" read-only="true" aria-labelledby="default-rating" id="reviewRating"></span>
     </div>
+
+    <div class="row" ng-show="facility.reviews.length === 0">
+      No reviews for this facility.
+    </div>
+
   </div>
   <div class="col-lg-2">
 
@@ -34,4 +34,5 @@
 
   </div>
 </div>
+<hr>
 

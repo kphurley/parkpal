@@ -9,10 +9,12 @@ router.use('/', function(req, res, next) {
 })
 
 router.get('/', function(req, res, next) {
-	Facility.findAll({
-		where: {
-			parkId: req.park.id
-		}
+	Facility.findAll(
+		{
+			where: {
+				parkId: req.park.id
+			},
+			include: [Review]
 	})
 	.then(function(facilities) {
 		res.json(facilities);
