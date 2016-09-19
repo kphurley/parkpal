@@ -1,6 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var Facility = require('../../../../db').model('facility'); // eslint-disable-line new-cap
+var chalk = require('chalk');
 module.exports = router;
 
 router.use('/', function(req, res, next) {
@@ -32,6 +33,17 @@ router.use('/:id', function(req, res, next) {
 
 router.get('/:id', function(req, res, next) {
 	res.json(req.facility);
+})
+
+router.put('/:id', function(req, res, next) {
+	Facility.findById(req.params.id)
+	.then(function(facility) {
+		return facility.update(req.body)
+	})
+	.then(function(updatedFacility) {
+		res.json(req.facility);
+	})
+	.catch(next);
 })
 
 router.use('/:id/slots', require('./slots'));
