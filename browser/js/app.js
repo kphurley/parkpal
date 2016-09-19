@@ -11,8 +11,8 @@ app.config(function ($urlRouterProvider, $locationProvider, $stateProvider) {
         window.location.reload();
     });
     $urlRouterProvider.when('/park/:id/facility/:facilityId', '/park/:id/facility/:facilityId/slots');
-    $urlRouterProvider.when('/user/:id', '/user/:id/profile'); 
-    $urlRouterProvider.when('/admin/parks', '/admin/parks/'); 
+    $urlRouterProvider.when('/user/:id', '/user/:id/profile');
+    $urlRouterProvider.when('/admin/parks', '/admin/parks/');
 });
 
 // This app.run is for controlling access to specific states.
