@@ -2,6 +2,8 @@
 var router = require('express').Router();
 var Facility = require('../../../../db').model('facility'); // eslint-disable-line new-cap
 var Review = require('../../../../db').model('review');
+var chalk = require('chalk');
+
 module.exports = router;
 
 router.use('/', function(req, res, next) {
@@ -50,6 +52,17 @@ router.post('/:id/review', function(req, res, next) {
 	})
 	.then(function(){
 		res.status(201).send('Review created.');
+	})
+	.catch(next);
+});
+
+router.put('/:id', function(req, res, next) {
+	Facility.findById(req.params.id)
+	.then(function(facility) {
+		return facility.update(req.body)
+	})
+	.then(function(updatedFacility) {
+		res.json(req.facility);
 	})
 	.catch(next);
 })

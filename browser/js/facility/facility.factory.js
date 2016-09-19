@@ -11,6 +11,10 @@ app.factory('FacilityFactory', function($http) {
     .then(getData);
   }
 
+  FacilityFactory.updateFacility = function(parkId, facility) {
+  	return $http.put('/api/parks/' + parkId + '/facilities/' + facility.id, facility)
+  	.then(getData)
+  }
 
   return FacilityFactory;
 
