@@ -1,0 +1,18 @@
+<h1>Edit Facility</h1>
+<form id="facility-update-form" name="facilityCreateForm" ng-submit="updateFacility(park.id, facilityToEdit)">
+    <alert type="danger" ng-show="error">
+        {{ error }}
+    </alert>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" ng-model="facilityToEdit.name" class="form-control" id="name" placeholder="{{facilityToEdit.name}}">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" ng-model="facilityToEdit.description" class="form-control" id="description" placeholder="{{facilityToEdit.description}}">
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
