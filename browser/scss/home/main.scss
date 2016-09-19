@@ -26,6 +26,18 @@
   	color: $orange;
     font-size: 1.5em;
   	list-style: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    &.active {
+      color: darken(#f31214, 10%);
+    };
+    &:hover {
+      background: none;
+      color: #f31214;
+    }
+    &:focus {
+      background: none;
+    }
   }
 
   .park-list-dropdown {

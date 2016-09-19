@@ -18,6 +18,24 @@ footer {
   .container {
   		color: gray;
 	}
+
+  li {
+    cursor: pointer;
+    transition: color 0.2s;
+    &.active {
+      color: darken(#f31214, 10%);
+    };
+    &:visited {
+      color: $orange;
+    };
+    &:hover {
+      background: none;
+      color: #f31214;
+    }
+    &:focus {
+      background: none;
+    }
+  }
 }
 
 
