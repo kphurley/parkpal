@@ -27,7 +27,8 @@ router.get('/:date', function(req, res, next) {
       startTime: {
         $between: [selectedDate, endOfSelectedDate]
       }
-    }
+    },
+    order: [['startTime', 'DESC']]
   })
   .then(function(slots) {
     res.json(slots);
