@@ -13,7 +13,12 @@ app.factory('FacilityFactory', function($http) {
 
   FacilityFactory.updateFacility = function(parkId, facility) {
   	return $http.put('/api/parks/' + parkId + '/facilities/' + facility.id, facility)
-  	.then(getData)
+  	.then(getData);
+  }
+
+  FacilityFactory.createFacility = function(facility) {
+    return $http.post('/api/parks/' + facility.parkId + '/facilities/', facility)
+    .then(getData);
   }
 
   return FacilityFactory;

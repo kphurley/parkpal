@@ -59,8 +59,6 @@ app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFacto
 	})
 
 	$scope.updateFacility = function(parkId, facilityToEdit) {
-		
-		console.log("HI THERE I'M PUSHED");
 
 		FacilityFactory.updateFacility(parkId, facilityToEdit)
 		.then(function (facility) {
@@ -68,6 +66,18 @@ app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFacto
 			$state.go('admin.parks.list');
 		});
 
+	}
+
+	$scope.createFacility = function(facility) {
+		facility.parkId = $stateParams.parkId;
+		FacilityFactory.createFacility(facility)
+		.then(function(newFacility) {
+			$scope.facility = newFacility;
+			$state.go('admin.parks.editPark.facilities', { 
+				parkId: newFacility.parkId
+				},
+				{reload: true});
+		})
 	}
 
 	$scope.facilityToEdit = $stateParams.facilityToEdit;
