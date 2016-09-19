@@ -21,6 +21,11 @@ app.factory('CartFactory', function($http, $q) {
 
   }
 
+  cartAPI.submitPayment = function() {
+    return $http.post('/api/payment', {})
+    .then(getData);
+  }
+
 	return cartAPI;
 
 });
