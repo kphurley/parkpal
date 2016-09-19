@@ -70,6 +70,14 @@ app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFacto
 
 	}
 
+	$scope.createFacility = function(facility) {
+		facility.parkId = park.id;
+		FacilityFactory.createNew(facility)
+		.then(function(newFacility) {
+			$scope.facility = newFacility;
+		})
+	}
+
 	$scope.facilityToEdit = $stateParams.facilityToEdit;
 });
 

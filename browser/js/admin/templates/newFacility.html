@@ -1,0 +1,34 @@
+<h1>NEW FACLITY</h1>
+<form id="facility-create-form" name="facilityCreateForm" ng-submit="createPark(facility)">
+
+    <alert type="danger" ng-show="error">
+        {{ error }}
+    </alert>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" ng-model="facility.name" class="form-control" id="name" placeholder="Enter facility name...">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" ng-model="facility.description" class="form-control" id="description" placeholder="Description...">
+    </div>
+
+    <div class="form-group">
+        <label for="location">Location</label>
+        <input type="text" ng-model="facility.location" class="form-control" id="location" placeholder="Location...">
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="phone" ng-model="facility.phone" class="form-control" id="phone" placeholder="Phone number...">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="text" ng-model="facility.email" class="form-control" id="email" placeholder="Email...">
+    </div>
+
+    <button type="submit" class="btn btn-success">Create Park</button>
+</form>
