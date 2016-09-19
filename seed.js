@@ -24,6 +24,7 @@ var Facility = db.model('facility');
 var Park = db.model('park');
 var Slot = db.model('slot');
 var Cart = db.model('cart');
+var Review = db.model('review');
 var Transaction = db.model('transaction');
 var Promise = require('sequelize').Promise;
 
@@ -95,14 +96,28 @@ var seedParksAndFacilities = function() {
         }
     ];
 
+    var reviews = [
+        {
+            title: 'This field is so dirty',
+            rating: 1,
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 
+        },
+        {
+            title: 'I hit a home run at Wicker Softball!',
+            rating: 5,
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+        }
+
+    ]
     // This implementation might give an issue in the future since facilities depend on a park existing in
     // the database first and these are async functions.... just a guess.
     // for now it works :)
+    // EDIT - added a couple of reviews to Wicker Softball for testing
     var createWickerPark =
-        Promise.all([Park.create(parks[0]), Facility.create(facilities[0]), Facility.create(facilities[1])])
-        .spread(function(park, facil0, facil1) {
-            return Promise.all([park.addFacility(facil0), park.addFacility(facil1)]);
+        Promise.all([Park.create(parks[0]), Facility.create(facilities[0]), Facility.create(facilities[1]), Review.create(reviews[0]), Review.create(reviews[1])])
+        .spread(function(park, facil0, facil1, review0, review1) {
+            return Promise.all([park.addFacility(facil0), park.addFacility(facil1), facil0.addReview(review0), facil0.addReview(review1)]);
         });
 
     var createWellesPark =

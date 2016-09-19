@@ -1,10 +1,8 @@
 //facility.controllers.js
-/*app.controller('DatepickerCtrl', function ($scope) {
+//app.controller('FacilityCtrl', function ($scope, FacilityFactory) {
 
-  $scope.valuationDate = new Date();
-  $scope.valuationDatePickerIsOpen = false;
+  //DEAL WITH AVERAGING THE REVIEWS AND OTHER FACILITY STUFF HERE
+  //HOOK INTO FACILITY FACTORY AVERAGER
+  //$scope.ratingAverage = FacilityFactory.averageRatings($scope.facility);
 
-  $scope.valuationDatePickerOpen = function () {
-    this.valuationDatePickerIsOpen = true;
-  };
-});*/
+//});

@@ -1,26 +1,37 @@
 <div class="container">
+
   <div ng-show="facility.reviews.length === 0">
     <h3><p>No reviews.  Add one below!</p></h3>
   </div>
 
-  <div ng-show="facility.reviews.length > 0" ng-repeat="review in facility.reviews">
-    {{ review }}
+  <div ng-show="facility.reviews.length > 0">
+    <h3><p>Reviews for {{facility.name}}:</p></h3>
+    <div ng-repeat="review in facility.reviews">
+      <p><span uib-rating ng-model="review.rating" max="5" readonly="true" aria-labelledby="default-rating" id="reviewRating"></span>
+      <strong>{{ review.title }}</strong></p>
+      <p>{{ review.text }}</p>
+    </div>
+    <h3><p>Add a review below:</p></h3>
   </div>
 
-  <div>
+  <div ng-controller="NewReviewCtrl">
     <form>
       <div class="form-group">
-        <label for="reviewTitle">Title</label>
-        <input type="text" class="form-control" id="reviewTitle" placeholder="Review Title">
+        <label for="reviewTitle">Title:</label>
+        <input type="text" class="form-control" id="reviewTitle" placeholder="Review Title" ng-model="newReview.title"> <br>
+        <label for="reviewRating">Rating:</label>
+        <span uib-rating class="form-control" ng-model="newReview.rating" max="5" readonly="false" aria-labelledby="default-rating" id="reviewRating"></span>
       </div>
       <div class="form-group">
         <label for="reviewText">Review</label>
-        <input type="textArea" class="form-control" id="reviewText" placeholder="Your Review Here...">
+        <textarea class="form-control" id="reviewText" rows="4" placeholder="Your Review Here..." ng-model="newReview.text"></textarea>
+
       </div>
 
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button class="btn btn-primary" ng-click="createReview()">Submit</button>
     </form>
   </div>
+
 </div>
 
 

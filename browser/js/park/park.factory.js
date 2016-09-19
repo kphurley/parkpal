@@ -5,6 +5,13 @@ app.factory('ParkFactory', function($http, $q) {
 		return res.data;
 	}
 
+  var average = function(reviews) {
+    if(reviews.length <= 0) return null;
+    let sum = reviews.map(review => review.rating)
+      .reduce((a,b) => a+b);
+    return Math.round(sum / reviews.length);
+  }
+
 	ParkFactory.findAll = function() {
 		return $http.get('/api/parks')
 		.then(getData);
@@ -20,6 +27,8 @@ app.factory('ParkFactory', function($http, $q) {
 		.then(function(results) {
 			var park = results[0];
 			park.facilities = results[1];
+      park.facilities.forEach(facility =>
+        facility.averageRating = average(facility.reviews));
 			return park;
 		})
 	}
