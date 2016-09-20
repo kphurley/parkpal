@@ -4,7 +4,7 @@ app.controller('NewReviewCtrl', function($scope, ReviewFactory, $state) {
     //console.log($scope.newReview);
     ReviewFactory.addReview($scope.facility, $scope.newReview)
     .then(function(){
-      $state.go('park.facilitySlots.slots', {id: $scope.facility.parkId, facilityId: $scope.facility.id});
+      $state.go('park.facilitySlots.slots', {id: $scope.facility.parkId, facilityId: $scope.facility.id}, {reload: true});
     });
   }
 })
