@@ -2,7 +2,8 @@
 <div class="col-lg-4 col-md-6 col-sm-9 panel panel-default">
   <div class="panel body">
     <h4>{{ facility.name }}</h4>
-    <img class="img-responsive" src="http://placehold.it/150x150" style="margin: 0 auto">
+    <img ng-if="!facility.imageUrl" class="img-responsive" ng-src="http://placehold.it/150x150" style="margin: 0 auto">
+    <img ng-if="facility.imageUrl" class="img-responsive" ng-src="{{facility.imageUrl}}" style="margin: 0 auto; width: 150px; height: 150px">
     <div>
       <div class="row" style="margin: 1px">
       <strong>Description: </strong>{{ facility.description }}
