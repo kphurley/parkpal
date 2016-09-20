@@ -6,6 +6,7 @@ var User = require('../../../db').model('user'); // eslint-disable-line new-cap
 var chalk = require('chalk');
 var userTransactionsRouter = require('./transactions');
 var authAPI = require('../authAPI');
+var Promise = require('bluebird');
 
 module.exports = router;
 
@@ -28,8 +29,10 @@ router.post('/', function (req, res, next) {
   user.firstName = req.body.firstName;
   user.lastName = req.body.lastName;
   user.phone = req.body.phone;
-  return User.create(user)
-  .then(user => res.status(201).json(user))
+  return Promise.all([User.create(user), Cart.create()])
+  .spread((user, cart) => user.setCart(cart))
+  .then((cart) => cart.getUser())
+  .then((user) => res.status(201).json(user))
   .catch(next);
 });
 
