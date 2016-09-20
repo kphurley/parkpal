@@ -12,5 +12,8 @@ module.exports = db.define('facility', {
   description: {
     type: Sequelize.TEXT,
     allowNull: false
+  },
+  imageUrl: {
+  	type: Sequelize.TEXT
   }
 });
