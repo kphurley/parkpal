@@ -26,7 +26,6 @@ router.post('/', ensureAuthenticated, function (req, res, next) {
   }, function(err, token) {
     if(err) next(err);
     else{
-      console.log('TOKEN: ', token);
       stripe.charges.create({
         amount: (+req.body.payment * 100),
         currency: "usd",

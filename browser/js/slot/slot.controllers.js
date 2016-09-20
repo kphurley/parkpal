@@ -10,12 +10,6 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
 
   $scope.findSlots = function() {
 
-    console.log("new date", new Date($scope.valuationDate));
-    console.log("new date compare", $scope.valuationDate.getTime())
-    console.log("new date compare", $scope.valuationDate.getDate())
-    console.log("new date compare", $scope.valuationDate.getFullYear())
-    console.log("new date compare", $scope.valuationDate.getMonth());
-    // $scope.formattedDate = ParkFactory.formatDate($scope.valuationDate);
     
     SlotFactory.findSlotsByDate($scope.park.id, $scope.facility.id, $scope.valuationDate)
     .then(function(_slots) {
@@ -31,7 +25,6 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
   $scope.addToCart = function(slotId) {
     SlotFactory.addToCart($scope.park.id, $scope.facility.id, slotId)
     .then(function(slot) {
-      console.log('slot added to cart:', slot);
       $state.go('park.facilitySlots.checkout',
                 {id: $scope.park.id, facilityId: $scope.facility.id},
                 {reload: true});

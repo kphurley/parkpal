@@ -16,9 +16,7 @@ module.exports = function (app, db) {
     };
 
     var verifyCallback = function (accessToken, refreshToken, profile, done) {
-        console.log(chalk.yellow("accessToken"), accessToken)
-        console.log(chalk.yellow("refreshToken"), refreshToken)
-        console.log(chalk.yellow("profile"), profile)
+       
         User.findOne({
                 where: {
                     facebook_id: profile.id

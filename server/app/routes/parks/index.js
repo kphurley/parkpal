@@ -10,8 +10,6 @@ var authAPI = require('../authAPI');
 
 
 router.use('/', function(req, res, next) {
-	console.log(chalk.red('Session Obj'), req.session);
-	console.log(chalk.magenta('User Obj'), req.user);
 	next();
 })
 

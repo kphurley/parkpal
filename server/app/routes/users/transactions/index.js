@@ -6,15 +6,9 @@ module.exports = router;
 
 var chalk = require('chalk');
 
-// router.use('/', function(req, res, next) {
-// 	console.log('USER      ", /', req.reqUser);
-// 	next();
-// });
+
 
 router.get('/', function(req, res, next) {
-	/*var rawSql = `SELECT * FROM "transactions" AS "transaction"
-	LEFT OUTER JOIN "slots" AS "slot" ON "transaction"."id" = "slot"."transactionId"
-	LEFT OUTER JOIN "facilities" AS "slot.facility" ON "slot"."facilityId" = "slot.facility"."id";`*/
 
  	Transaction.findAll( {
  		where: { userId: req.reqUser.id },

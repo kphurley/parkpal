@@ -5,6 +5,11 @@ app.controller('AdminCtrl', function($scope, UserFactory, AdminFactory, $state, 
 		$scope.users = users;
 	});
 
+	UserFactory.getOne($stateParams.id)
+	.then(function(_user) {
+		$scope.currentUser = _user;
+	})
+
 	$scope.createNewUser = function(userData) {
 		AdminFactory.createUser(userData)
 		.then(function(user) {
@@ -13,7 +18,6 @@ app.controller('AdminCtrl', function($scope, UserFactory, AdminFactory, $state, 
 	};
 
 	$scope.editUser = function(userData) {
-		console.log("admin controller user data", userData);
 		UserFactory.updateUser(userData)
 		.then(function(user) {
 			$state.go('admin.users');
@@ -57,7 +61,6 @@ app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFacto
 	$scope.createSlots = function() {
 		SlotFactory.createSlots($scope.newSlot, $stateParams.facilityId, $stateParams.parkId)
 		.then(function(slots) {
-			console.log(slots)
 		})
 	}
 
@@ -70,7 +73,6 @@ app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFacto
 
 		FacilityFactory.updateFacility(parkId, facilityToEdit)
 		.then(function (facility) {
-			console.log(facility);
 			$state.go('admin.parks.list');
 		});
 
@@ -87,6 +89,23 @@ app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFacto
 				{reload: true});
 		})
 	}
+
+	$scope.removeSlot = function(slotId) {
+		SlotFactory.removeSlot(slotId, $stateParams.parkId, $stateParams.facilityId)
+		.then(function(stuff) {
+			$state.transitionTo($state.current, $stateParams, {
+			    reload: true,
+			    inherit: false,
+			    notify: true
+			});
+		});
+	}
+
+	SlotFactory.findAllSlotsInFactory($stateParams.parkId, $stateParams.facilityId)
+	.then(function(slots) {
+		$scope.slots = slots;
+	});
+
 
 	$scope.facilityToEdit = $stateParams.facilityToEdit;
 });

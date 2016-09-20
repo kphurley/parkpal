@@ -45,7 +45,6 @@ app.factory('ParkFactory', function($http, $q) {
   }
 
   ParkFactory.updatePark = function(parkData) {
-  	console.log("factory park data", parkData)
 		return $http.put('/api/parks/' + parkData.id, parkData)
 		.then(getData)
   }
@@ -54,15 +53,3 @@ app.factory('ParkFactory', function($http, $q) {
 	return ParkFactory;
 })
 
-
-/*var url = '/api/artists/' + id;
-    return $q.all([$http.get(url), $http.get(url + '/songs'), $http.get(url + '/albums')])
-    .then( function (responses) { return responses.map(getData); })
-    .then( function (results) {
-      var artist = results[0];
-      var songs = results[1].map(SongFactory.convert);
-      var albums = results[2].map(AlbumFactory.convert);
-      artist.songs = songs;
-      artist.albums = albums;
-      return artist;
-    });*/

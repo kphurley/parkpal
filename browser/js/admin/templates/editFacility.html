@@ -1,20 +1,49 @@
 <h1>Edit Facility</h1>
-<form id="facility-update-form" name="facilityCreateForm" ng-submit="updateFacility(park.id, facilityToEdit)">
-    <alert type="danger" ng-show="error">
-        {{ error }}
-    </alert>
+<div class="row">
+    <div class="col-md-6">
+    <form id="facility-update-form" name="facilityCreateForm" ng-submit="updateFacility(park.id, facilityToEdit)">
+        <alert type="danger" ng-show="error">
+            {{ error }}
+        </alert>
 
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" ng-model="facilityToEdit.name" class="form-control" id="name" placeholder="{{facilityToEdit.name}}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" ng-model="facilityToEdit.name" class="form-control" id="name" placeholder="{{facilityToEdit.name}}">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" ng-model="facilityToEdit.description" class="form-control" id="description" placeholder="{{facilityToEdit.description}}">
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+    </form>
+
+
+    <table class="table table-striped table-responsive">
+    <tr>
+        <th>Time</th>
+        <th>Price</th>
+        <th>Booked</th>
+        <th>Remove</th>
+    </tr>
+    <tr ng-repeat="slot in slots | orderBy: slot.startTime">
+          <td> {{ slot.startTime | date:'hh:mm' }} - {{ slot.endTime | date:'hh:mm' }} </td>
+          <td> ${{ slot.price }} </td>
+          <td> {{slot.booked}} </td>
+          <td>
+                <button class="btn btn-danger" ng-click="removeSlot(slot.id)">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" >
+                </span>
+                </button>
+          </td>
+        </tr>
+    </table>
     </div>
-
-    <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" ng-model="facilityToEdit.description" class="form-control" id="description" placeholder="{{facilityToEdit.description}}">
+    <div class="col-md-6">
+        <a class="btn btn-primary" ui-sref="admin.parks.editPark.facilities.facility.addSlots">Add Slots</a>
+        <ui-view></ui-view>
     </div>
+</div>
 
-    <button type="submit" class="btn btn-success">Update</button>
-</form>
 
-<ui-view></ui-view>

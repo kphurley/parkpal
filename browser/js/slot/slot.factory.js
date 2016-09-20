@@ -29,7 +29,6 @@ app.factory('SlotFactory', function($http, CartFactory, AuthService) {
         return $http.get('/api/carts/' + cart.id + '/slots');
       })
       .then(function(slots) {
-        console.log('slots in slot factory',slots);
         return slots.data;
       });
     },
@@ -84,6 +83,11 @@ app.factory('SlotFactory', function($http, CartFactory, AuthService) {
       }
       return $http.post('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/', arrayOfSlots)
         .then(getData);
+    },
+
+    removeSlot: function(slotId, parkId, facilityId) {
+      return $http.delete('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/' + slotId)
+      .then(getData);
     },
 
     //Deletes slotId from a cart and set booked to false

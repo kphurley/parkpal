@@ -71,7 +71,6 @@ router.post('/', function(req, res, next) {
 	Facility.create(req.body)
 	.then(function(facility) {
 		res.json(facility)
-		console.log(facility);
 	})
 	.catch(next);
 });

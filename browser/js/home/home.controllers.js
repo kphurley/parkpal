@@ -7,7 +7,7 @@ app.controller('HomeCtrl', function($scope, HomeFactory, $state) {
 	});
 
 	$scope.goToPark = function(parkId)  {
-		$state.go('park', {id: parkId});
+		$state.go('park.description', {id: parkId});
 	}
 
 });

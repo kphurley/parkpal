@@ -79,7 +79,6 @@ app.config(function($stateProvider) {
             slot.startTimeConverted = SlotFactory.convertTime(slot.startTime);
             slot.endTimeConverted = SlotFactory.convertTime(slot.endTime);
           });
-          console.log('slots after convert', slots);
           return slots;
         });
 

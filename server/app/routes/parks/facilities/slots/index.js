@@ -17,10 +17,8 @@ router.get('/', function(req, res, next) {
 })
 
 router.get('/:date', function(req, res, next) {
-  //var date = req.params.date;
   var selectedDate = new Date(+req.params.date);
   var endOfSelectedDate = new Date(+req.params.date + 24*60*60*1000)
-  console.log(chalk.blue("INSIDE THE DATE ROUTE"), endOfSelectedDate);
   Slot.findAll({
     where: {
       facilityId: req.facility.id,
@@ -37,10 +35,22 @@ router.get('/:date', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   return Slot.bulkCreate(req.body)
   .then(slots => res.status(201).json(slots))
   .catch(next);
+})
+
+router.delete('/:slotId', function(req,res,next) {
+  return Slot.findOne({ where: { id: req.params.slotId}})
+  .then(function(slot) {
+    if (!slot) {
+      res.sendStatus(404)
+      next(new Error("slot not found"));
+    }    
+    slot.destroy();
+    res.sendStatus(204);
+    next();
+  })
 })
 
 router.post('/:id', function(req, res, next) {

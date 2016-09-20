@@ -59,7 +59,6 @@ router.put('/:id', authAPI.isMe, function(req, res, next) {
   User.findById(req.params.id)
   .then(function (user) {
     delete req.body.isAdmin;
-    console.log("*******************************", req.body)
     return user.update(req.body);
   })
   .then(function(user) {
