@@ -1,4 +1,5 @@
 <div>
+  {{ slot }}
   <div>
     <h2>Slots for: {{ formattedDate }}</h2>
     <table class="table table-striped">
@@ -11,9 +12,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="slot in slots">
-          <td>{{ slot.startTimeConverted }}</td>
-          <td>{{ slot.endTimeConverted }} </td>
+        <tr ng-repeat="slot in slots | orderBy: slot.startTime">
+          <td>{{ slot.startTime | date:'hh:mm' }}</td>
+          <td>{{ slot.endTime | date:'hh:mm' }} </td>
           <td>${{ slot.price }}</td>
           <td><div ng-show="slot.booked">BOOKED</div>
               <div ng-hide="slot.booked">
