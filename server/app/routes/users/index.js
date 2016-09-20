@@ -55,12 +55,9 @@ router.get('/:id', authAPI.isMe, function(req, res, next) {
 router.put('/:id', authAPI.isMe, function(req, res, next) {
   User.findById(req.params.id)
   .then(function (user) {
-    user.firstName = req.body.firstName;
-    user.lastName = req.body.lastName;
-    user.email = req.body.email;
-    user.phone = req.body.phone;
+    delete req.body.isAdmin;
     console.log("*******************************", req.body)
-    return user.update(user);
+    return user.update(req.body);
   })
   .then(function(user) {
     if (!user) { throw new Error("I don't know what to do") }
