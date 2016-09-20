@@ -10,7 +10,6 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
 
   $scope.findSlots = function() {
 
-    
     SlotFactory.findSlotsByDate($scope.park.id, $scope.facility.id, $scope.valuationDate)
     .then(function(_slots) {
       _slots.forEach((slot) => {
@@ -30,5 +29,6 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
                 {reload: true});
     })
   }
+
 });
 
