@@ -52,7 +52,15 @@ app.controller('AdminParkCtrl', function($scope, ParkFactory, $state, $statePara
 
 });
 
-app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFactory, FacilityFactory, $state) {
+app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFactory, FacilityFactory, $state, SlotFactory) {
+
+	$scope.createSlots = function() {
+		SlotFactory.createSlots($scope.newSlot, $stateParams.facilityId, $stateParams.parkId)
+		.then(function(slots) {
+			console.log(slots)
+		})
+	}
+
 	ParkFactory.findOne($stateParams.parkId)
 	.then(function(park) {
 		$scope.park = park;
@@ -73,7 +81,7 @@ app.controller('AdminParkFacilityCtrl', function($scope, $stateParams, ParkFacto
 		FacilityFactory.createFacility(facility)
 		.then(function(newFacility) {
 			$scope.facility = newFacility;
-			$state.go('admin.parks.editPark.facilities', { 
+			$state.go('admin.parks.editPark.facilities', {
 				parkId: newFacility.parkId
 				},
 				{reload: true});
