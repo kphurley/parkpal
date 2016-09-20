@@ -17,7 +17,7 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <tr ng-repeat="park in parks | filter: { id: search.id }
+	    <tr ng-repeat="park in parks | orderBy: 'name' | filter: { id: search.id }
 	    							 | filter: { name: search.name }
 	    							 | filter: { description: search.description }
 	    							 | filter: { location: search.location }
@@ -34,4 +34,4 @@
 	  </tbody>
 	</table>
 </div>
-  
+

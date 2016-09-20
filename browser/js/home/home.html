@@ -4,7 +4,7 @@
 		  <div uib-dropdown uib-dropdown-toggle>
 	      <input type="text" class="form-control" placeholder="Search for a park..." ng-model="search">
 			    <ul uib-dropdown-menu class="park-list-dropdown">
-			        <li ng-repeat="park in parks | filter: { name: search}" ng-click="goToPark(park.id)">{{park.name}}</li>
+			        <li ng-repeat="park in parks | orderBy: 'name' | filter: { name: search}" ng-click="goToPark(park.id)">{{park.name}}</li>
 			    </ul>
 	      </div>
 		</div>
@@ -15,4 +15,4 @@
 	      <h1>ParkPal Parks</h1>
 		</div>
 	</div>
-</div>  
+</div>
