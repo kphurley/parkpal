@@ -12,18 +12,18 @@ var chalk = require('chalk');
 // });
 
 router.get('/', function(req, res, next) {
-	var rawSql = `SELECT * FROM "transactions" AS "transaction" 
-	LEFT OUTER JOIN "slots" AS "slot" ON "transaction"."id" = "slot"."transactionId" 
-	LEFT OUTER JOIN "facilities" AS "slot.facility" ON "slot"."facilityId" = "slot.facility"."id";` 
+	/*var rawSql = `SELECT * FROM "transactions" AS "transaction"
+	LEFT OUTER JOIN "slots" AS "slot" ON "transaction"."id" = "slot"."transactionId"
+	LEFT OUTER JOIN "facilities" AS "slot.facility" ON "slot"."facilityId" = "slot.facility"."id";`*/
 
- 	Transaction.findAll( { 
+ 	Transaction.findAll( {
  		where: { userId: req.reqUser.id },
  		include: [{
  			model: Slot,
  			include: [Facility]
  		}]
 	 })
- 							// include: [Slot, {model: Facility, 
+ 							// include: [Slot, {model: Facility,
  							// 				through: { attributes: ['id']}}]} )
  	.then(function(transactions) {
  		res.json(transactions);
