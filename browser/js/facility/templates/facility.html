@@ -1,39 +1,40 @@
 <!--facility.html-->
-<div class="row">
-  <h2>{{ facility.name }}</h2>
-  <div class="col-lg-2">
-    <img src="http://placehold.it/150x150">
-  </div>
-  <div class="col-lg-8">
-    <div class="row">
-    {{ facility.description }}
+<div class="col-lg-4 col-md-6 col-sm-9 panel panel-default">
+  <div class="panel body">
+    <h4>{{ facility.name }}</h4>
+    <img class="img-responsive" src="http://placehold.it/150x150" style="margin: 0 auto">
+    <div>
+      <div class="row" style="margin: 1px">
+      <strong>Description: </strong>{{ facility.description }}
+      </div>
+      <br>
+      <div class="row" ng-show="facility.reviews.length > 0" style="margin: 1px">
+        Average user rating:
+        <span uib-rating ng-model="facility.averageRating" max="5" readonly="true" aria-labelledby="default-rating" id="reviewRating"></span>
+      </div>
+
+      <div class="row" ng-show="facility.reviews.length === 0" style="margin: 1px">
+        No reviews for this facility.
+      </div>
+
     </div>
-    <div class="row" ng-show="facility.reviews.length > 0">
-      Average user rating:
-      <span uib-rating ng-model="facility.averageRating" max="5" readonly="true" aria-labelledby="default-rating" id="reviewRating"></span>
+    <div>
+
+      <button ng-hide="inSlots" style="margin: 0 auto" class="btn btn-primary" ui-sref="park.facilitySlots({facilityId: facility.id})" style="margin: 1px">View Schedule</button>
+
+      <div ng-show="inSlots" style="margin: 1px">
+          <input type="text" class="form-control"
+                 uib-datepicker-popup="mediumDate"
+                 is-open="valuationDatePickerIsOpen"
+                 ng-click="valuationDatePickerOpen()"
+                 ng-model="valuationDate"
+                 placeholder="Click to choose a date" />
+          <button ng-click="findSlots()" class="btn btn-primary">Find Slots</button>
+      </div>
+
     </div>
-
-    <div class="row" ng-show="facility.reviews.length === 0">
-      No reviews for this facility.
-    </div>
-
-  </div>
-  <div class="col-lg-2">
-
-    <button ng-hide="inSlots" class="btn btn-default" ui-sref="park.facilitySlots({facilityId: facility.id})">View Schedule</button>
-
-    <div ng-show="inSlots">
-        <input type="text" class="form-control"
-               uib-datepicker-popup="mediumDate"
-               is-open="valuationDatePickerIsOpen"
-               ng-click="valuationDatePickerOpen()"
-               ng-model="valuationDate"
-               placeholder="Click to choose a date" />
-        <button ng-click="findSlots()" class="btn btn-primary">Find Slots</button>
-    </div>
-
   </div>
 </div>
-<hr>
+
 
 

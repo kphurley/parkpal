@@ -27,6 +27,8 @@ var Cart = db.model('cart');
 var Review = db.model('review');
 var Transaction = db.model('transaction');
 var Promise = require('sequelize').Promise;
+var parkData = require('./seed.helper').parkData;
+var facilityData = require('./seed.helper').facilityData;
 
 var seedUsers = function () {
 
@@ -56,7 +58,7 @@ var seedUsers = function () {
 
 var seedParksAndFacilities = function() {
 
-    var parks = [
+    /*var parks = [
         {
             name: 'Wicker Park',
             address: '1425 North Damen',
@@ -79,9 +81,50 @@ var seedParksAndFacilities = function() {
             phone: '(312) 742-7511',
             imageUrl: 'http://www.chicagoparkdistrict.com/assets/1/7/SlideShowDimensionMain/c5e08f1f1a394bbd9b73269ddc25aaef1.jpg'
         }
-    ];
+    ];*/
 
-    var facilities = [
+    var parks = [];//add to this array for more images
+
+    var images = ['http://www.chicagoparkdistrict.com/assets/1/7/SlideShowDimensionMain/2af6cafa9da54750bc8d37613207c7141.JPG',
+                'http://www.chicagoparkdistrict.com/assets/1/7/SlideShowDimensionMain/c5e08f1f1a394bbd9b73269ddc25aaef1.jpg'];
+
+    //get a random image from the image list
+    var randomImage = function(){
+        return images[Math.floor(Math.random()*images.length)];
+    }
+
+    parkData.forEach(function(park) {
+       parks.push({
+            id: Math.floor(+park['PARK NUMBER']),
+            name: park.LABEL,
+            address: park['STREET ADDRESS'],
+            city: 'Chicago',
+            state: 'IL',
+            zip: park.ZIP,
+            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam dui neque, tincidunt nec pretium suscipit, volutpat a tortor. Donec porta consequat dui, ut rhoncus leo viverra nec. Nullam sollicitudin scelerisque lobortis. Etiam in viverra nunc, quis hendrerit ante. Quisque leo ligula, bibendum non accumsan non, finibus non est. Nulla risus ipsum, commodo eget venenatis quis, rutrum sit amet massa. Sed massa turpis, vulputate ut egestas ut, elementum eget enim. Nulla lacus velit, condimentum vel vulputate eu, aliquam ac erat. Nulla orci odio, consequat non sagittis at, ultricies et nisi. Praesent tempus maximus enim, id dapibus eros maximus quis. Proin vitae mi sit amet risus rutrum vestibulum viverra vel est. Nunc elementum, dui ac scelerisque rutrum, augue lectus fermentum ligula, ut condimentum enim nunc non neque. Duis ut sem id enim viverra tincidunt. Nulla aliquam eleifend ornare. Proin non arcu nec enim euismod condimentum id sed odio.\nVivamus tempus, nisl eget malesuada dictum, ligula nunc accumsan est, finibus commodo quam turpis et augue. Suspendisse sed nibh dui. Ut lorem metus, commodo eget commodo non, scelerisque non ante. Aliquam placerat suscipit nulla, nec venenatis eros ultrices ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis convallis orci id tortor auctor dignissim. Nunc aliquet justo elit.',
+            email: 'park@park.park',
+            phone: '(312) 742-7511',
+            imageUrl: randomImage()
+       })
+    });
+
+    var facilities = [];
+
+    var prettify = function(str) {
+        return str.split(' ').map(s => s.toLowerCase())
+        .map(s => (s.substr(0,1).toUpperCase()+s.substr(1)))
+        .join(' ');
+    }
+
+    facilityData.forEach(function(facility) {
+        facilities.push({
+           name: prettify(facility['FACILITY_T'] + ' ' + facility['FACILITY_N']) + ' #' + facility['OBJECTID'],
+           description: 'Praesent augue tortor, blandit sed bibendum eget, ultrices tempus erat. Suspendisse a iaculis augue, rutrum porttitor diam. Vivamus feugiat non mi eu sagittis. Nulla felis sem, varius ut neque et, maximus porttitor justo. Fusce odio nunc, ultrices sed arcu non, malesuada lobortis mauris. Suspendisse potenti.',
+           parkId: Math.floor(+facility['PARK_NO'])
+        });
+    })
+
+    /*var facilities = [
         {
             name: 'Wicker Softball',
             description: 'A softball field at Wicker Park.'
@@ -94,19 +137,23 @@ var seedParksAndFacilities = function() {
             name: 'Welles Park Pool',
             description: 'A place to swim at Welles Park'
         }
-    ];
+    ];*/
 
     var reviews = [
         {
             title: 'This field is so dirty',
             rating: 1,
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            userId: 1,
+            facilityId: 123
 
         },
         {
-            title: 'I hit a home run at Wicker Softball!',
+            title: 'I hit a home run!',
             rating: 5,
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            userId: 4,
+            facilityId: 211
         }
 
     ]
@@ -114,7 +161,7 @@ var seedParksAndFacilities = function() {
     // the database first and these are async functions.... just a guess.
     // for now it works :)
     // EDIT - added a couple of reviews to Wicker Softball for testing
-    var createWickerPark =
+    /*var createWickerPark =
         Promise.all([Park.create(parks[0]), Facility.create(facilities[0]), Facility.create(facilities[1]), Review.create(reviews[0]), Review.create(reviews[1])])
         .spread(function(park, facil0, facil1, review0, review1) {
             return Promise.all([park.addFacility(facil0), park.addFacility(facil1), facil0.addReview(review0), facil0.addReview(review1)]);
@@ -124,9 +171,13 @@ var seedParksAndFacilities = function() {
         Promise.all([Park.create(parks[1]), Facility.create(facilities[2])])
         .spread(function(park, facil) {
             return park.addFacility(facil);
-        });
+        });*/
 
-    return Promise.all([createWickerPark, createWellesPark]);
+    var createParks = Promise.all(parks.map(park => Park.create(park)));
+    var createFacilities = Promise.all(facilities.map(facility => Facility.create(facility)));
+    var createReviews = Promise.all(reviews.map(review => Review.create(review)));
+
+    return Promise.all([createParks, createFacilities, createReviews]);
 }
 
 /**
@@ -145,7 +196,7 @@ var createSlots = function(facilityId) {
     //var endTime = 1800;
     var startDate = Date.now();
     for(var i=0; i<24; i++)
-    {   
+    {
         var endDate = startDate + 60*60*1000;
 
         slotArray.push({
