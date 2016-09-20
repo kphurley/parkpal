@@ -36,6 +36,13 @@ router.get('/:date', function(req, res, next) {
   .catch(next);
 })
 
+router.post('/', function(req, res, next) {
+  console.log(req.body);
+  return Slot.bulkCreate(req.body)
+  .then(slots => res.status(201).json(slots))
+  .catch(next);
+})
+
 router.post('/:id', function(req, res, next) {
   var toUpdate = {
     cartId: req.body.cartId,

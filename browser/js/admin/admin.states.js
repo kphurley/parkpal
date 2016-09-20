@@ -43,7 +43,7 @@ app.config(function ($stateProvider) {
 		templateUrl: '/js/admin/templates/newParkTemplate.html',
 		controller: 'AdminParkCtrl'
 	});
-	
+
 	$stateProvider.state('admin.parks.editPark', {
 		url: '/:parkId',
 		templateUrl: '/js/admin/templates/editParkMain.html',
@@ -82,6 +82,13 @@ app.config(function ($stateProvider) {
 	$stateProvider.state('admin.parks.editPark.facilities.facility', {
 		url: '/:facilityId',
 		templateUrl: '/js/admin/templates/editFacility.html',
+		params: {parkId: null, facilityToEdit: null, facilities: null},
+		controller: 'AdminParkFacilityCtrl'
+	});
+
+	$stateProvider.state('admin.parks.editPark.facilities.facility.addSlots', {
+		url: '/addSlots',
+		templateUrl: '/js/admin/templates/addSlots.html',
 		params: {parkId: null, facilityToEdit: null, facilities: null},
 		controller: 'AdminParkFacilityCtrl'
 	});
