@@ -2,7 +2,7 @@ app.controller('ParkCtrl', function($scope, parks) {
 	$scope.parks = parks;
 });
 
-app.controller('SingleParkCtrl', function($scope, park, ParkFactory) {
+app.controller('SingleParkCtrl', function($scope, park, ParkFactory, AuthService) {
   $scope.park = park;
   $scope.inSlots = false;
 
@@ -14,5 +14,9 @@ app.controller('SingleParkCtrl', function($scope, park, ParkFactory) {
     this.valuationDatePickerIsOpen = true;
   };
 
+  AuthService.getLoggedInUser()
+  .then(function(user){
+    $scope.user = user;
+  })
 
 })
