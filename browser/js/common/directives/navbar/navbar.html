@@ -7,6 +7,7 @@
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
+            
             <li ng-show="user">
                 <a ui-sref-active="active" ui-sref="user.profile({id: user.id})">Profile</a>
             </li>
@@ -14,14 +15,18 @@
         <div class="navbar-buttons">
             <button ng-show="!user" ui-sref="login" class="btn btn-success">Login</button>
             <button ng-show="!user" ui-sref="signup" class="btn btn-primary">Sign up</button>
+            
         </div>
         <div ng-show="user" class="welcome">
             <a ui-sref="user.cart({id: user.id})">
                 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true">
                 </span>
             </a>
-            <span>Welcome, {{ user.email }}!</span>
-            <a ng-click="logout()">Logout</a>
+            <span ng-show="!user.isAdmin">Welcome, {{ user.email }}!</span>
+            <button ng-click="logout()" class="btn btn-danger">Logout</button>
+            <button class="btn btn-warning" ng-show="user.isAdmin" ui-sref-active="active" ui-sref="admin({id: user.id})">
+                ADMININSTRATION PORTAL
+            </button>
         </div>
     </div>
 </nav>
