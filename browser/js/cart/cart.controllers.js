@@ -1,5 +1,5 @@
 app.controller('CartCtrl', function($scope, userCart, userSlots, CartFactory,
-                                    SlotFactory, $state, AuthService, $q) {
+                                    SlotFactory, $state, AuthService, $q, $window) {
 	// hardcoded for now
 	// carts should be associated with a particular user
 	/*CartFactory.findOne(1)
@@ -40,7 +40,8 @@ app.controller('CartCtrl', function($scope, userCart, userSlots, CartFactory,
 	$scope.removeFromCart = function(userId, slotId) {
 		$q.all([SlotFactory.deleteFromCart(slotId), CartFactory.findUserCart(userId)])
 		.then(function(slot, cart) {
-			$state.go('user.removeFromCart', {id: $scope.user.id}, {reload: true});
+			//hack to reload current state
+			$window.location.reload();
 		})
 	}
 
