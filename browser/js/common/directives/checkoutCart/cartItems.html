@@ -1,41 +1,43 @@
-<h2>Your cart: </h2>
-<table class="table table-striped" id="checkout-cart">
-  <thead>
-    <tr>
-      <!-- <th>#</th> -->
-      <th>Facility</th>
-      <th>Time</th>
-      <th>Cost</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="slot in slots"> <!-- should ng-repeat item in cart-items -->
-      <!-- <th scope="row">1</th> -->
-      <td>{{ slot.facilityId }}</td>
-      <td>{{ slot.startTimeConverted }} - {{ slot.endTimeConverted }}</td>
-      <td>{{ slot.price }}</td>
-      <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true" ng-click="removeFromCart(user.id, slot.id)"></span></td>
-    </tr>
-    <tr>
-      <td class="thick-line"></td>
-      <td class="thick-line text-right">Sub-Total</td>
-      <td class="thick-line">{{ subtotal }}</td>
-      <td class="thick-line"></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="text-right">Tax</td>
-      <td>{{ tax }}</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="text-right">Total</td>
-      <td>{{ total }}</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<div class="park_body col-lg-8 col-md-6 col-sm-12">
+  <h2>Your cart: </h2>
+  <table class="table table-striped" id="checkout-cart">
+    <thead>
+      <tr>
+        <!-- <th>#</th> -->
+        <th>Facility</th>
+        <th>Time</th>
+        <th>Cost</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="slot in slots"> <!-- should ng-repeat item in cart-items -->
+        <!-- <th scope="row">1</th> -->
+        <td>{{ slot.facilityId }}</td>
+        <td>{{ slot.startTimeConverted }} - {{ slot.endTimeConverted }}</td>
+        <td>{{ slot.price }}</td>
+        <td><span class="glyphicon glyphicon-remove-sign" aria-hidden="true" ng-click="removeFromCart(user.id, slot.id)"></span></td>
+      </tr>
+      <tr>
+        <td class="thick-line"></td>
+        <td class="thick-line text-right">Sub-Total</td>
+        <td class="thick-line">{{ subtotal }}</td>
+        <td class="thick-line"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="text-right">Tax</td>
+        <td>{{ tax }}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="text-right">Total</td>
+        <td>{{ total }}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
