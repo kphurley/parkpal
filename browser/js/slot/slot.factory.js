@@ -57,6 +57,35 @@ app.factory('SlotFactory', function($http, CartFactory, AuthService) {
       })
       .then(getData);
     },
+
+    createSlots: function(slotsObj, facilityId, parkId) {
+      var arrayOfSlots = [];
+      var currentDate = new Date();
+      var day = currentDate.getDate();
+      var month = currentDate.getMonth();
+      var year = currentDate.getFullYear();
+      var newDate = new Date(year, month, day, slotsObj.startTime);
+      var start = newDate.getTime();
+      var duration = slotsObj.duration * 1000 * 60;
+      var slotsPerDay = slotsObj.slotsPerDay;
+      var slotDays = slotsObj.slotDays;
+      var price = slotsObj.price;
+      for (var j = 0; j < slotDays; j++) {
+        var slotStart = new Date(start + (j * 24 * 60 * 60 * 1000));
+        for (var i = 1; i <= slotsPerDay; i++) {
+          var newSlot = {};
+          newSlot.startTime = (slotStart);
+          newSlot.endTime = new Date(slotStart.getTime() + duration);
+          newSlot.price = price;
+          newSlot.facilityId = facilityId;
+          arrayOfSlots.push(newSlot);
+          slotStart = newSlot.endTime;
+        }
+      }
+      return $http.post('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/', arrayOfSlots)
+        .then(getData);
+    },
+
     //Deletes slotId from a cart and set booked to false
     deleteFromCart: function(slotId) {
       return $http.put('/api/carts/user/' + slotId, {})
