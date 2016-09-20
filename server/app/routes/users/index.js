@@ -5,6 +5,8 @@ var Cart = require('../../../db').model('cart');
 var User = require('../../../db').model('user'); // eslint-disable-line new-cap
 var chalk = require('chalk');
 var userTransactionsRouter = require('./transactions');
+var authAPI = require('../authAPI');
+
 module.exports = router;
 
 router.use('/:id', function(req, res, next) {
@@ -12,25 +14,26 @@ router.use('/:id', function(req, res, next) {
   .then(function(user) {
     if (!user) { res.status(404).send(); }
     req.reqUser = user;
-    console.log(chalk.blue('user'), req.reqUser);
     next();
   })
   .catch(next);
 });
 
-router.use('/:id/transactions', userTransactionsRouter);
+router.use('/:id/transactions', authAPI.isMe, userTransactionsRouter);
 
 router.post('/', function (req, res, next) {
-  var userLogin = {};
-  userLogin.email = req.body.email;
-  userLogin.password = req.body.password;
-  return User.create(req.body)
+  var user = {};
+  user.email = req.body.email;
+  user.password = req.body.password;
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
+  user.phone = req.body.phone;
+  return User.create(user)
   .then(user => res.status(201).json(user))
   .catch(next);
 });
 
 router.get('/', function(req, res, next) {
-  console.log('getting here');
   return User.findAll()
   .then(function(users) {
     res.json(users);
@@ -38,7 +41,7 @@ router.get('/', function(req, res, next) {
   .catch(next);
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', authAPI.isMe, function(req, res, next) {
 	return User.findById(req.params.id)
 	.then(function(user) {
 		if (!user) { res.status(404).send(); }
@@ -49,11 +52,15 @@ router.get('/:id', function(req, res, next) {
 });
 
 
-router.put('/:id', function(req, res, next) {
-  console.log(chalk.red("INSIDE put rout"), req.body);
+router.put('/:id', authAPI.isMe, function(req, res, next) {
   User.findById(req.params.id)
   .then(function (user) {
-    return user.update(req.body);
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+    user.email = req.body.email;
+    user.phone = req.body.phone;
+    console.log("*******************************", req.body)
+    return user.update(user);
   })
   .then(function(user) {
     if (!user) { throw new Error("I don't know what to do") }
