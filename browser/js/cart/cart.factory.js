@@ -1,4 +1,4 @@
-app.factory('CartFactory', function($http, $q) {
+app.factory('CartFactory', function($http, $q, $state) {
 
 	var cartAPI = {};
 
@@ -26,6 +26,15 @@ app.factory('CartFactory', function($http, $q) {
     return $http.post('/api/payment', payment)
     .then(getData);
   }
+
+  //Should remove slotId from userId's cart - UNFINISHED!!
+  /*cartAPI.removeFromCart = function(userId, slotId) {
+    var slotMod = {slotId: slotId, booked: false}
+    return $http.put('/api/carts/user/' + userId, slotMod)
+    .then(function() {
+      return cartAPI.findUserCart(userId);
+    });
+  }*/
 
 	return cartAPI;
 

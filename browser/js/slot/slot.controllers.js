@@ -33,7 +33,8 @@ app.controller('SlotsCtrl', function($scope, SlotFactory, ParkFactory, slots, fa
     .then(function(slot) {
       console.log('slot added to cart:', slot);
       $state.go('park.facilitySlots.checkout',
-                {id: $scope.park.id, facilityId: $scope.facility.id});
+                {id: $scope.park.id, facilityId: $scope.facility.id},
+                {reload: true});
     })
   }
 });

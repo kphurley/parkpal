@@ -15,7 +15,12 @@ app.config(function($stateProvider) {
 	$stateProvider.state('user.transactions', {
 		url: '/transactions',
 		templateUrl: '/js/user/templates/userTransactions.html',
-		controller: 'UserCtrl'
+		controller: 'UserCtrl',
+    resolve: {
+      transactions: function($stateParams, TransactionFactory) {
+        return TransactionFactory.getAllByUserId($stateParams.id);
+      }
+    }
 	});
 
 	$stateProvider.state('user.cart', {
@@ -38,5 +43,10 @@ app.config(function($stateProvider) {
       }
     }
   });
+
+  $stateProvider.state('user.removeFromCart', {
+    url: '/removeFromCart',
+    templateUrl: '/js/user/templates/userRemoveFromCart.html'
+  })
 
 });

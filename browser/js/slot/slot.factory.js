@@ -83,6 +83,12 @@ app.factory('SlotFactory', function($http, CartFactory, AuthService) {
         }
       }
       return $http.post('/api/parks/' + parkId + '/facilities/' + facilityId + '/slots/', arrayOfSlots)
+        .then(getData);
+    },
+
+    //Deletes slotId from a cart and set booked to false
+    deleteFromCart: function(slotId) {
+      return $http.put('/api/carts/user/' + slotId, {})
       .then(getData);
     }
   }
