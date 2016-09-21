@@ -1,3 +1,4 @@
+var chalk = require('chalk');
 
 var authAPI = {};
 
@@ -16,11 +17,14 @@ authAPI.isMe = function(req, res, next) {
 }
 
 authAPI.isAdmin = function (req, res, next) {
+	console.log(chalk.yellow("req.user", req.user))
 	if (!req.user) {
-		res.status(401).end()
+		res.status(401)
+		next(new Error)
 		}
 	if (!req.user.isAdmin) {
-		res.status(403).end();
+		res.status(403)
+		next(new Error);
 	}
 	next()
 }
