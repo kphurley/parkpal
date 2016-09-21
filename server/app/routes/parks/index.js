@@ -8,13 +8,6 @@ var HTTPError = require('httperror');
 var authAPI = require('../authAPI');
 
 
-
-router.use('/', function(req, res, next) {
-	console.log(chalk.red('Session Obj'), req.session);
-	console.log(chalk.magenta('User Obj'), req.user);
-	next();
-})
-
 router.get('/', function(req, res, next) { // no auth needed
 	Park.findAll()
 	.then(function(parks) {
@@ -43,7 +36,7 @@ router.put('/:id', authAPI.isAdmin, function(req, res, next) { // ONLY ADMINS
 		return park.update(req.body);
 	})
 	.then(function(park) {
-		if (!park) {throw new Error("this is not the park you are looking for")}
+		if (!park) {next(new Error("this is not the park you are looking for"))}
 		res.json(park);
 	})
 	.catch(next);
